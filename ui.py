@@ -21,7 +21,7 @@ def print_table(table, title_list):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-        
+
     longest_data_list = []
     for row in range(len(table[0])):
         longest_data_list.append(len(table[0][row]))
@@ -33,7 +33,7 @@ def print_table(table, title_list):
 
     for i in range(len(longest_data_list)):
         longest_data_list[i] += 2
-    
+
     line_lenght = 0
 
     for k in longest_data_list:
@@ -42,28 +42,24 @@ def print_table(table, title_list):
 
     for k in range(line_lenght):
         print('-', end='')
-    print('')  
+    print('')
 
     print("|", end='')
     for i in range(len(title_list)):
-        print("| {:^{space_length}} ".format(title_list[i], space_length=longest_data_list[i]), end = '')
+        print("| {:^{space_length}} ".format(title_list[i], space_length=longest_data_list[i]), end='')
     print('||')
     for k in range(line_lenght):
         print('-', end='')
-    print('')  
+    print('')
 
     for i in range(len(table)):
         print("|", end='')
         for j in range(len(table[i])):
-            print("| {:^{space_length}} ".format(table[i][j], space_length=longest_data_list[j]), end = '')
+            print("| {:^{space_length}} ".format(table[i][j], space_length=longest_data_list[j]), end='')
         print("||")
         for k in range(line_lenght):
             print('-', end='')
         print('')
-        
-        
-
-    # your goes code
 
 
 def print_result(result, label):
@@ -78,7 +74,6 @@ def print_result(result, label):
         None: This function doesn't return anything it only prints to console.
     """
     print(label + ": " + str(result))
-    # your code
 
 
 def print_menu(title, list_options, exit_message):
@@ -105,7 +100,7 @@ def print_menu(title, list_options, exit_message):
     print(title + ": ")
     for option in list_options:
         print("\t(" + str(counter) + ") " + option)
-        counter += 1 
+        counter += 1
     print("\t(0) " + exit_message)
 
 
@@ -135,7 +130,6 @@ def get_inputs(list_labels, title):
     return inputs
 
 
-
 def print_error_message(message):
     """
     Displays an error message (example: ``Error: @message``)
@@ -148,7 +142,3 @@ def print_error_message(message):
     """
 
     print("Error: " + message)
-
-    # your code
-
-
