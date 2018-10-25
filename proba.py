@@ -43,3 +43,31 @@ for i in range(len(table)):
         print('-', end = '')
     print('')    
     
+
+def print_result(result, label):
+    """
+    Displays results of the special functions.
+
+    Args:
+        result: result of the special function (string, list or dict)
+        label (str): label of the result
+
+    Returns:
+        None: This function doesn't return anything it only prints to console.
+    """
+    print(label + ": " + str(result))
+    # your code
+
+
+def print_menu(title, list_options, exit_message):
+    counter = 1
+    print(title + ": ")
+    for option in list_options:
+        print("\t(" + str(counter) + ") " + option)
+        counter += 1 
+    print("\t(0) " + exit_message)
+    select = input("Please, select an option.")
+    if select == "0":
+        return None
+
+print_menu("Main", title_list , "exit")
