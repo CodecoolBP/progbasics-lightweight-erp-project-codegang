@@ -80,6 +80,8 @@ def print_result(result, label):
         None: This function doesn't return anything it only prints to console.
     """
 
+    print(label  + ": "+ str(result))
+
     # your code
 
 
@@ -143,5 +145,7 @@ def print_error_message(message):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
+
+    print("Error: " + message)
 
     # your code
