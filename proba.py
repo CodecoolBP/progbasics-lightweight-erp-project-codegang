@@ -15,20 +15,7 @@ print(longest_data_list)
 for i in range(len(longest_data_list)):
     longest_data_list[i] += 2
     
-# for i in range(len(table)):
-#     for j in range(len(table[i])):
-#         print('|', end = '')
-#         number_of_spaces = round((longest_data_list[j] - len(table[i][j])) / 2)
-#         for spaces in range(number_of_spaces):
-#             print(' ', end = '')
-#         print(table[i][j], end = '')
-#         number_of_spaces = ((longest_data_list[j] - len(table[i][j])) / 2) 
-#         if number_of_spaces != round(number_of_spaces):
-#             number_of_spaces -= 1    
-#         number_of_spaces = round(number_of_spaces)
-#         for spaces in range(number_of_spaces):
-#             print(' ', end = '')
-#     print('')
+
 line_lenght = 0
 
 for k in longest_data_list:
