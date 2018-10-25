@@ -92,3 +92,11 @@ while is_id_new == False:
 
 print(id_)
 
+
+def remove(table, id_):
+    for lst in table:
+        if id_ in lst:
+            table.remove(lst)
+
+remove(table, "one")
+print(table)

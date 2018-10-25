@@ -28,6 +28,7 @@ def start_module():
     Returns:
         None
     """
+
     table = data_manager.get_table_from_file("sales_test.csv")
     options = (["Show table",
                 "Add to table",
@@ -56,7 +57,6 @@ def start_module():
         raise KeyError("There is no such option.")
 
 
-
 def show_table(table):
     """
     Display a table
@@ -67,6 +67,7 @@ def show_table(table):
     Returns:
         None
     """
+
     table = data_manager.get_table_from_file("sales_test.csv")
     ui.print_table(table)
 
@@ -81,11 +82,14 @@ def add(table):
     Returns:
         list: Table with a new record
     """
+
     title_list = ["Title", "Price", "Month", "Day", "Year"]
     inputs = common.generate_random(table)
     inputs.append(ui.get_inputs(title_list, "Please provide the required information"))
     data_manager.write_table_to_file("sales_test.csv", inputs)
     return table
+
+    
 
 
 def remove(table, id_):
@@ -99,9 +103,11 @@ def remove(table, id_):
     Returns:
         list: Table without specified record.
     """
-
-    # your code
-
+    
+    for lst in table:
+        if id_ in lst:
+            table.remove(lst)
+    data_manager.write_table_to_file("sales_test.csv", table)
     return table
 
 
