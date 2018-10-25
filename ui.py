@@ -79,7 +79,13 @@ def print_result(result, label):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
+<<<<<<< HEAD
     print(label + ": " + str(result))
+=======
+
+    print(label  + ": "+ str(result))
+
+>>>>>>> 5a5c642b163ab424c0ccba7be287b9b65373bc4e
     # your code
 
 
@@ -151,6 +157,10 @@ def print_error_message(message):
         None: This function doesn't return anything it only prints to console.
     """
 
+<<<<<<< HEAD
+=======
+    print("Error: " + message)
+>>>>>>> 5a5c642b163ab424c0ccba7be287b9b65373bc4e
 
     # your code
 
