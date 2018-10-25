@@ -70,4 +70,4 @@ def print_menu(title, list_options, exit_message):
     if select == "0":
         return None
 
-print_menu("Main", title_list , "exit")
+print_menu("Main", title_list , "Kilépés")
