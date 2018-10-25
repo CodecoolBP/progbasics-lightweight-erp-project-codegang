@@ -28,8 +28,12 @@ def start_module():
     Returns:
         None
     """
+<<<<<<< HEAD
 
     table = data_manager.get_table_from_file("sales_test.csv")
+=======
+    table = data_manager.get_table_from_file("sales/sales_test.csv")
+>>>>>>> 19eeff3ceb1a60836504b9a24257dcea0476d6a4
     options = (["Show table",
                 "Add to table",
                 "Remove from table",
@@ -46,7 +50,7 @@ def start_module():
     elif option == "3":
         remove(table, id)
     elif option == "4":
-        show_table(table)
+        update(table, id)
     elif option == "5":
         sales.start_module()
     elif option == "6":
@@ -67,9 +71,15 @@ def show_table(table):
     Returns:
         None
     """
+<<<<<<< HEAD
 
     table = data_manager.get_table_from_file("sales_test.csv")
     ui.print_table(table)
+=======
+    title_list = ["ID", "Title", "Price", "Month", "Day", "Year"]
+    table = data_manager.get_table_from_file("sales/sales_test.csv")
+    ui.print_table(table, title_list)
+>>>>>>> 19eeff3ceb1a60836504b9a24257dcea0476d6a4
 
 
 def add(table):
@@ -86,7 +96,8 @@ def add(table):
     title_list = ["Title", "Price", "Month", "Day", "Year"]
     inputs = common.generate_random(table)
     inputs.append(ui.get_inputs(title_list, "Please provide the required information"))
-    data_manager.write_table_to_file("sales_test.csv", inputs)
+    table.append(inputs)
+    data_manager.write_table_to_file("sales/sales_test.csv", table)
     return table
 
     
