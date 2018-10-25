@@ -1,3 +1,4 @@
+import random
 title_list = ["egy","kettő","három"]
 table = ([["one","dos","fgt"],
           ["drei","vier44","anyu"],
@@ -70,4 +71,24 @@ def print_menu(title, list_options, exit_message):
     if select == "0":
         return None
 
-print_menu("Main", title_list , "Exit")
+
+
+nums = ['1','2','3','4','5','6','7','8','9','0']
+lowers = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+uppers =['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+specials = ['§','+', '!', '%', '/', '=', '(', ')', '~', 'ˇ', 'ˇ', '^', '˘', '°', '|', 'Ä', '€', 'Í', '÷', '×', 'ä', 'đ', 'Đ', 'í', 'ł', 'Ł', '$', 'ß', '¤', '<', '>', '#', '&', '@', '.']
+characters = [nums,lowers,uppers,specials]
+id_ = ''
+is_id_new = False
+
+while is_id_new == False:
+    for character in characters:
+        id_ += random.choice(character)
+        id_ += random.choice(character)
+    id_ = ''.join(random.sample(id_, len(id_)))
+    if id_ not in table:
+        is_id_new = True
+    
+
+print(id_)
+
