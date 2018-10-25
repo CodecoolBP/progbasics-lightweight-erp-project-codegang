@@ -100,3 +100,28 @@ def remove(table, id_):
 
 remove(table, "one")
 print(table)
+
+def update(table, id_):
+    """
+    Updates specified record in the table. Ask users for new data.
+
+    Args:
+        table (list): list in which record should be updated
+        id_ (str): id of a record to update
+
+    Returns:
+        list: table with updated record
+    """
+    counter = 0
+    id_ = input("ID of the record: ")
+    for lst in table:
+        counter += 1
+        if id_ in lst:
+            table[counter][1] = input("Title: ")
+            table[counter][2] = input("Price: ")
+            table[counter][3] = input("Month: ")
+            table[counter][4] = input("Day: ")
+            table[counter][5] = input("Year: ")
+    
+
+update(table,id_)

@@ -107,7 +107,7 @@ def remove(table, id_):
         list: Table without specified record.
     """
     value = False
-    id_ = input("ID of the number: ")
+    id_ = input("ID of the record: ")
     for lst in table:
         if id_ in lst:
             table.remove(lst)
@@ -130,9 +130,18 @@ def update(table, id_):
     Returns:
         list: table with updated record
     """
-
-    # your code
-
+    counter = 0
+    id_ = input("ID of the record: ")
+    for lst in table:
+        counter += 1
+        if id_ in lst:
+            table[counter-1][1] = input("Title: ")
+            table[counter-1][2] = input("Price: ")
+            table[counter-1][3] = input("Month: ")
+            table[counter-1][4] = input("Day: ")
+            table[counter-1][5] = input("Year: ")
+    data_manager.write_table_to_file("sales/sales_test.csv", table)
+    start_module()
     return table
 
 
@@ -172,3 +181,6 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     """
 
     # your code
+
+
+
