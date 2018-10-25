@@ -51,7 +51,7 @@ def start_module():
     elif option == "6":
         crm.start_module()
     elif option == "0":
-        ui.print_menu("Main menu", options, "Exit program")
+        pass                       #ui.print_menu("Main menu", options, "Exit program")
     else:
         raise KeyError("There is no such option.")
 
