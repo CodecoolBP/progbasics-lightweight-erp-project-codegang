@@ -79,7 +79,7 @@ def print_result(result, label):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
+    print(label + ": " + str(result))
     # your code
 
 
@@ -103,8 +103,15 @@ def print_menu(title, list_options, exit_message):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
-    # your code
+    counter = 1
+    print(title + ": ")
+    for option in list_options:
+        print("\t(" + str(counter) + ") " + option)
+        counter += 1 
+    print("\t(0) " + exit_message)
+    select = input("Please, select an option.")
+    if select == "0":
+        return None
 
 
 def get_inputs(list_labels, title):
@@ -144,4 +151,7 @@ def print_error_message(message):
         None: This function doesn't return anything it only prints to console.
     """
 
+
     # your code
+
+
