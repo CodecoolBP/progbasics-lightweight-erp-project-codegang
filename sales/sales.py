@@ -28,8 +28,33 @@ def start_module():
     Returns:
         None
     """
+    table = data_manager.get_table_from_file("sales_test.csv")
+    options = (["Show table",
+                "Add to table",
+                "Remove from table",
+                "Update the table",
+                "Get the lowest price from the table",
+                "Get items sold between dates"])
+    ui.print_menu("Sales menu", options, "Back to main menu")
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        remove(table, id)
+    elif option == "4":
+        show_table(table)
+    elif option == "5":
+        sales.start_module()
+    elif option == "6":
+        crm.start_module()
+    elif option == "0":
+        sys.exit(0)
+    else:
+        raise KeyError("There is no such option.")
 
-    # your code
 
 
 def show_table(table):
@@ -42,8 +67,8 @@ def show_table(table):
     Returns:
         None
     """
-
-    # your code
+    table = data_manager.get_table_from_file("sales_test.csv")
+    ui.print_table(table)
 
 
 def add(table):
@@ -56,9 +81,10 @@ def add(table):
     Returns:
         list: Table with a new record
     """
-
-    # your code
-
+    title_list = ["Title", "Price", "Month", "Day", "Year"]
+    inputs = common.generate_random(table)
+    inputs.append(ui.get_inputs(title_list, "Please provide the required information"))
+    data_manager.write_table_to_file("sales_test.csv", inputs)
     return table
 
 
