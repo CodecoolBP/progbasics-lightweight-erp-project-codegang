@@ -29,7 +29,7 @@ def print_table(table, title_list):
             if longest_data_list[row] < len(table[column][row]):
                 longest_data_list[row] = len(table[column][row])
 
-    print(longest_data_list)
+    #print(longest_data_list)
 
     for i in range(len(longest_data_list)):
         longest_data_list[i] += 2

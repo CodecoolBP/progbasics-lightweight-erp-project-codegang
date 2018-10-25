@@ -28,12 +28,7 @@ def start_module():
     Returns:
         None
     """
-<<<<<<< HEAD
-
-    table = data_manager.get_table_from_file("sales_test.csv")
-=======
     table = data_manager.get_table_from_file("sales/sales_test.csv")
->>>>>>> 19eeff3ceb1a60836504b9a24257dcea0476d6a4
     options = (["Show table",
                 "Add to table",
                 "Remove from table",
@@ -56,7 +51,7 @@ def start_module():
     elif option == "6":
         crm.start_module()
     elif option == "0":
-        sys.exit(0)
+        ui.print_menu("Main menu", options, "Exit program")
     else:
         raise KeyError("There is no such option.")
 
@@ -71,16 +66,10 @@ def show_table(table):
     Returns:
         None
     """
-<<<<<<< HEAD
-
-    table = data_manager.get_table_from_file("sales_test.csv")
-    ui.print_table(table)
-=======
     title_list = ["ID", "Title", "Price", "Month", "Day", "Year"]
     table = data_manager.get_table_from_file("sales/sales_test.csv")
     ui.print_table(table, title_list)
->>>>>>> 19eeff3ceb1a60836504b9a24257dcea0476d6a4
-
+    start_module()
 
 def add(table):
     """
@@ -94,10 +83,13 @@ def add(table):
     """
 
     title_list = ["Title", "Price", "Month", "Day", "Year"]
-    inputs = common.generate_random(table)
-    inputs.append(ui.get_inputs(title_list, "Please provide the required information"))
+    inputs = [] 
+    id_ = common.generate_random(table)
+    inputs.extend(ui.get_inputs(title_list, "Please provide the required information"))
+    inputs.insert(0,id_)
     table.append(inputs)
     data_manager.write_table_to_file("sales/sales_test.csv", table)
+    start_module()
     return table
 
     
@@ -114,11 +106,16 @@ def remove(table, id_):
     Returns:
         list: Table without specified record.
     """
-    
+    value = False
+    id_ = input("ID of the number: ")
     for lst in table:
         if id_ in lst:
             table.remove(lst)
-    data_manager.write_table_to_file("sales_test.csv", table)
+            value = True
+    if value == False:
+        print('not in table')
+    data_manager.write_table_to_file("sales/sales_test.csv", table)
+    start_module()
     return table
 
 
