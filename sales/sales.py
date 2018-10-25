@@ -45,7 +45,7 @@ def start_module():
     elif option == "3":
         remove(table, id)
     elif option == "4":
-        show_table(table)
+        update(table, id)
     elif option == "5":
         sales.start_module()
     elif option == "6":
@@ -84,7 +84,8 @@ def add(table):
     title_list = ["Title", "Price", "Month", "Day", "Year"]
     inputs = common.generate_random(table)
     inputs.append(ui.get_inputs(title_list, "Please provide the required information"))
-    data_manager.write_table_to_file("sales_test.csv", inputs)
+    table.append(inputs)
+    data_manager.write_table_to_file("sales_test.csv", table)
     return table
 
 
