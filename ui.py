@@ -107,9 +107,6 @@ def print_menu(title, list_options, exit_message):
         print("\t(" + str(counter) + ") " + option)
         counter += 1 
     print("\t(0) " + exit_message)
-    select = input("Please, select an option.")
-    if select == "0":
-        return None
 
 
 def get_inputs(list_labels, title):
@@ -134,7 +131,7 @@ def get_inputs(list_labels, title):
     inputs = []
     print(title)
     for data in list_labels:
-        inputs.append(input(data + ": "))
+        inputs.append(input(data))
     return inputs
 
 
