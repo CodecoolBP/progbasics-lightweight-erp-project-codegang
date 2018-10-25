@@ -22,7 +22,6 @@ def print_table(table, title_list):
         None: This function doesn't return anything it only prints to console.
     """
         
-
     longest_data_list = []
     for row in range(len(table[0])):
         longest_data_list.append(len(table[0][row]))
@@ -34,8 +33,7 @@ def print_table(table, title_list):
 
     for i in range(len(longest_data_list)):
         longest_data_list[i] += 2
-        
-
+    
     line_lenght = 0
 
     for k in longest_data_list:
@@ -43,25 +41,25 @@ def print_table(table, title_list):
     line_lenght += len(table) * 3 + 3
 
     for k in range(line_lenght):
-        print('-', end = '')
+        print('-', end='')
     print('')  
 
-    print("|", end = '')
+    print("|", end='')
     for i in range(len(title_list)):
         print("| {:^{space_length}} ".format(title_list[i], space_length=longest_data_list[i]), end = '')
     print('||')
     for k in range(line_lenght):
-        print('-', end = '')
+        print('-', end='')
     print('')  
 
     for i in range(len(table)):
-        print("|", end = '')
+        print("|", end='')
         for j in range(len(table[i])):
             print("| {:^{space_length}} ".format(table[i][j], space_length=longest_data_list[j]), end = '')
         print("||")
         for k in range(line_lenght):
-            print('-', end = '')
-        print('')    
+            print('-', end='')
+        print('')
         
         
 
@@ -79,9 +77,7 @@ def print_result(result, label):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
-    print(label  + ": "+ str(result))
-
+    print(label + ": " + str(result))
     # your code
 
 
@@ -136,10 +132,11 @@ def get_inputs(list_labels, title):
             [<user_input_1>, <user_input_2>, <user_input_3>]
     """
     inputs = []
-
-    # your code
-
+    print(title)
+    for data in list_labels:
+        inputs.append(input(data + ": "))
     return inputs
+
 
 
 def print_error_message(message):
