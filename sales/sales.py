@@ -47,9 +47,9 @@ def start_module():
     elif option == "4":
         update(table, id)
     elif option == "5":
-        sales.start_module()
+        pass
     elif option == "6":
-        crm.start_module()
+        pass
     elif option == "0":
         pass                       #ui.print_menu("Main menu", options, "Exit program")
     else:

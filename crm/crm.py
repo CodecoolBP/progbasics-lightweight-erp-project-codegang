@@ -27,7 +27,24 @@ def start_module():
         None
     """
 
-    # your code
+    table = data_manager.get_table_from_file("crm/customers.csv")
+    options = (["Show table",
+                "Add to table",
+                "Remove from table",
+                "Update table",
+                "Get lonest name ID",
+                "Get subscribed e-mails"])
+    ui.print_menu("Customer Relationship management", options, "Back to main manu")
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        remove(table, id)
+    elif option == "4":
+        update(table, id)
 
 
 def show_table(table):
@@ -41,7 +58,10 @@ def show_table(table):
         None
     """
 
-    # your code
+    titles = ["ID", "Name", "Email", "Subscribed"]
+    table = data_manager.get_table_from_file("crm/customers_test.csv")
+    ui.print_table(table, titles)
+    start_module()
 
 
 def add(table):
@@ -55,8 +75,12 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
-
+    new_data = []
+    new_data.append(common.generate_random(table))
+    new_data.extend(ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the necessary information: "))
+    table.append(new_data)
+    data_manager.write_table_to_file("crm/customers_test.csv", table)
+    start_module()
     return table
 
 
@@ -71,9 +95,17 @@ def remove(table, id_):
     Returns:
         list: Table without specified record.
     """
-
-    # your code
-
+    wrong_id = True
+    while wrong_id:
+        id_ = input("Choose an ID to remove: ")
+        for row in table:
+            if row[0] == id_:
+                table.remove(row)
+                wrong_id = False
+            else:    
+                print("That ID is not in the table.")
+    data_manager.write_table_to_file("crm/customers_test.csv", table)
+    start_module()
     return table
 
 
@@ -88,9 +120,14 @@ def update(table, id_):
     Returns:
         list: table with updated record
     """
-
-    # your code
-
+ 
+    id_ = input("Choose an ID to update: ")
+    id_index = table.index(id_)
+    for row in table:
+        if id_ in row:
+            table[id_index] = ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the required information")
+    data_manager.write_table_to_file("crm/customers_test.csv", table)
+    start_module()
     return table
 
 
