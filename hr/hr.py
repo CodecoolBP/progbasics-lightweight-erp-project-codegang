@@ -25,6 +25,32 @@ def start_module():
     Returns:
         None
     """
+    table = data_manager.get_table_from_file("hr/persons_test.csv")
+    options = (["Show table",
+                "Add to table",
+                "Remove from table",
+                "Update the table",
+                "Get oldest person",
+                "Get person close to avarage"])
+    ui.print_menu("HR menu", options, "Back to main menu")
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        remove(table, id)
+    elif option == "4":
+        update(table, id)
+    elif option == "5":
+        pass
+    elif option == "6":
+        pass
+    elif option == "0":
+        pass                       #ui.print_menu("Main menu", options, "Exit program")
+    else:
+        raise KeyError("There is no such option.")
 
     # your code
 
@@ -39,6 +65,9 @@ def show_table(table):
     Returns:
         None
     """
+    title_list = ["ID", "Name", "Year"]
+    ui.print_table(table, title_list)
+    start_module()
 
     # your code
 
@@ -54,9 +83,16 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
-
+    title_list = ["Name", "Year"]
+    inputs = [] 
+    id_ = common.generate_random(table)
+    inputs.extend(ui.get_inputs(title_list, "Please provide the required information:"))
+    inputs.insert(0,id_)
+    table.append(inputs)
+    data_manager.write_table_to_file("hr/persons_test.csv", table)
+    start_module()
     return table
+
 
 
 def remove(table, id_):
@@ -71,8 +107,16 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
-
+    value = False
+    id_ = input("ID of the person: ")
+    for lst in table:
+        if id_ in lst:
+            table.remove(lst)
+            value = True
+    if value == False:
+        print('not in table')
+    data_manager.write_table_to_file("hr/persons_test.csv", table)
+    start_module()
     return table
 
 
@@ -88,9 +132,17 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
-
+    counter = 0
+    id_ = input("ID of the person: ")
+    for lst in table:
+        counter += 1
+        if id_ in lst:
+            table[counter-1][1] = input("Name: ")
+            table[counter-1][2] = input("Year: ")
+    data_manager.write_table_to_file("hr/persons_test.csv", table)
+    start_module()
     return table
+
 
 
 # special functions:
