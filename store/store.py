@@ -27,8 +27,32 @@ def start_module():
     Returns:
         None
     """
-
-    # your code
+    table = data_manager.get_table_from_file("store/games_test.csv")
+    options = (["Show table",
+                "Add to table",
+                "Remove from table",
+                "Update the table",
+                "Counts games by manufacturer",
+                "Get items sold between dates"])
+    ui.print_menu("Store menu", options, "Back to main menu")
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        remove(table, id)
+    elif option == "4":
+        update(table, id)
+    elif option == "5":
+        pass
+    elif option == "6":
+        pass
+    elif option == "0":
+        pass                       #ui.print_menu("Main menu", options, "Exit program")
+    else:
+        raise KeyError("There is no such option.")
 
 
 def show_table(table):
@@ -42,7 +66,10 @@ def show_table(table):
         None
     """
 
-    # your code
+    title_list = ["Title", "Manufacturer", "Price", "Stock"]
+    table = data_manager.get_table_from_file("store/games_test.csv")
+    ui.print_table(table, title_list)
+    start_module()
 
 
 def add(table):
@@ -56,8 +83,14 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
-
+    title_list = ["Title", "Manufacturer", "Price", "Stock"]
+    inputs = [] 
+    id_ = common.generate_random(table)
+    inputs.extend(ui.get_inputs(title_list, "Please provide the required information"))
+    inputs.insert(0,id_)
+    table.append(inputs)
+    data_manager.write_table_to_file("store/games_test.csv", table)
+    start_module()
     return table
 
 
@@ -73,8 +106,16 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
-
+    value = False
+    id_ = input("ID of the record: ")
+    for lst in table:
+        if id_ in lst:
+            table.remove(lst)
+            value = True
+    if value == False:
+        print('not in table')
+    data_manager.write_table_to_file("store/games_test.csv", table)
+    start_module()
     return table
 
 
@@ -90,8 +131,17 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
-
+    counter = 0
+    id_ = input("ID of the record: ")
+    for lst in table:
+        counter += 1
+        if id_ in lst:
+            table[counter-1][1] = input("Title: ")
+            table[counter-1][2] = input("Manufacturer: ")
+            table[counter-1][3] = input("Price: ")
+            table[counter-1][4] = input("Stock: ")
+    data_manager.write_table_to_file("store/games_test.csv", table)
+    start_module()
     return table
 
 

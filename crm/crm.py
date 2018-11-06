@@ -81,7 +81,7 @@ def add(table):
     table.append(new_data)
     data_manager.write_table_to_file("crm/customers_test.csv", table)
     start_module()
-    return table
+    
 
 
 def remove(table, id_):
