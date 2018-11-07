@@ -136,7 +136,7 @@ def update(table, id_):
     for row in table:
         if row[0] == id_[0]:
             inputs.extend(ui.get_inputs(["Name: ","Year: "], "Please provide the necessary information: "))
-            for i in range(2):
+            for i in range(len(inputs)):
                 table[id_index][i+1] = inputs[i-1]
         else:    
             id_index += 1

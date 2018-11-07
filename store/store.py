@@ -83,7 +83,7 @@ def add(table):
         list: Table with a new record
     """
 
-    title_list = ["Title", "Manufacturer", "Price", "Stock"]
+    title_list = ["Title: ", "Manufacturer: ", "Price: ", "Stock: "]
     inputs = [] 
     id_ = common.generate_random(table)
     inputs.extend(ui.get_inputs(title_list, "Please provide the required information"))
@@ -106,14 +106,12 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    value = False
-    id_ = input("ID of the record: ")
+    title_list = ["ID: "]
+    inputs = []
+    inputs.extend(ui.get_inputs(title_list, "ID of removable item:"))
     for lst in table:
-        if id_ in lst:
+        if inputs[0] in lst:
             table.remove(lst)
-            value = True
-    if value == False:
-        print('not in table')
     data_manager.write_table_to_file("store/games_test.csv", table)
     start_module()
     return table
@@ -131,18 +129,21 @@ def update(table, id_):
         list: table with updated record
     """
 
-    counter = 0
-    id_ = input("ID of the record: ")
-    for lst in table:
-        counter += 1
-        if id_ in lst:
-            table[counter-1][1] = input("Title: ")
-            table[counter-1][2] = input("Manufacturer: ")
-            table[counter-1][3] = input("Price: ")
-            table[counter-1][4] = input("Stock: ")
+    id_index = 0
+    inputs = []
+    id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+    for row in table:
+        if row[0] == id_[0]:
+            inputs.extend(ui.get_inputs(["Title: ", "Manufacturer: ", "Price: ", "Stock: "], "Please provide the necessary information: "))
+            for i in range(len(inputs)):
+                table[id_index][i+1] = inputs[i-1]
+        else:    
+            id_index += 1
     data_manager.write_table_to_file("store/games_test.csv", table)
     start_module()
     return table
+
+
 
 
 # special functions:
