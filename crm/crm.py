@@ -97,13 +97,11 @@ def remove(table, id_):
     """
     wrong_id = True
     while wrong_id:
-        id_ = input("Choose an ID to remove: ")
+        id_ = ui.get_inputs(["ID: "], "Choose an ID to remove: ")
         for row in table:
-            if row[0] == id_:
+            if row[0] == id_[0]:
                 table.remove(row)
                 wrong_id = False
-            else:    
-                print("That ID is not in the table.")
     data_manager.write_table_to_file("crm/customers_test.csv", table)
     start_module()
     return table
@@ -120,12 +118,17 @@ def update(table, id_):
     Returns:
         list: table with updated record
     """
- 
-    id_ = input("Choose an ID to update: ")
-    id_index = table.index(id_)
-    for row in table:
-        if id_ in row:
-            table[id_index] = ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the required information")
+    
+    id_index = None
+    wrong_id = True
+    while wrong_id:
+        id_ = ui.get_inputs(["ID: "], "Choose an ID to remove: ")
+        for row in table:
+            if row[0] == id_[0]:
+                id_index = row.index(id_[0])
+                table[id_index] = ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the necessary information: ")
+                wrong_id = False
+    table[id_index].insert(0, id_[0])
     data_manager.write_table_to_file("crm/customers_test.csv", table)
     start_module()
     return table
