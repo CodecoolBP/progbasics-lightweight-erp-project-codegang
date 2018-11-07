@@ -83,7 +83,7 @@ def add(table):
         list: Table with a new record
     """
 
-    title_list = ["Name", "Year"]
+    title_list = ["Name: ", "Year: "]
     inputs = [] 
     id_ = common.generate_random(table)
     inputs.extend(ui.get_inputs(title_list, "Please provide the required information:"))
@@ -107,14 +107,12 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    value = False
-    id_ = input("ID of the person: ")
+    title_list = ["ID: "]
+    inputs = []
+    inputs.extend(ui.get_inputs(title_list, "ID of removable person:"))
     for lst in table:
-        if id_ in lst:
+        if inputs[0] in lst:
             table.remove(lst)
-            value = True
-    if value == False:
-        print('not in table')
     data_manager.write_table_to_file("hr/persons_test.csv", table)
     start_module()
     return table
@@ -132,13 +130,16 @@ def update(table, id_):
         list: table with updated record
     """
 
-    counter = 0
-    id_ = input("ID of the person: ")
-    for lst in table:
-        counter += 1
-        if id_ in lst:
-            table[counter-1][1] = input("Name: ")
-            table[counter-1][2] = input("Year: ")
+    id_index = 0
+    inputs = []
+    id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+    for row in table:
+        if row[0] == id_[0]:
+            inputs.extend(ui.get_inputs(["Name: ","Year: "], "Please provide the necessary information: "))
+            for i in range(2):
+                table[id_index][i+1] = inputs[i-1]
+        else:    
+            id_index += 1
     data_manager.write_table_to_file("hr/persons_test.csv", table)
     start_module()
     return table
@@ -151,7 +152,7 @@ def update(table, id_):
 def get_oldest_person(table):
     """
     Question: Who is the oldest person?
-
+z
     Args:
         table (list): data table to work on
 
