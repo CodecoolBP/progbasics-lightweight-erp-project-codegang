@@ -49,7 +49,7 @@ def start_module():
     elif option == "4":
         update(table, id)
     elif option == "5":
-        pass
+        ui.print_result(which_year_max(table),"Best year")
     elif option == "6":
         pass
     elif option == "0":
@@ -179,12 +179,28 @@ def which_year_max(table):
     """
 
     # your code
-    yearly_profit = 0
-    for lst in table:
-        counter += 1
-        if id_ in lst:
-            pass
-        
+    best_year = ""
+    highest_profit = 0
+    yearly_profit = {}
+    for line in table:
+        year = line[3]
+        in_or_out = line[4]
+        amount = int(line[5])
+        if year not in yearly_profit:
+            if in_or_out == "in":
+                yearly_profit[year] = amount
+            else:
+                yearly_profit[year] = 0-amount
+        else:
+            if in_or_out == "in":
+                yearly_profit[year] += amount
+            else:
+                yearly_profit[year] -= amount
+    for year in yearly_profit:
+        if yearly_profit[year] > highest_profit:
+            highest_profit = yearly_profit[year]
+            best_year = year
+    return best_year
 
 
 
@@ -201,3 +217,4 @@ def avg_amount(table, year):
     """
     pass
     # your code
+    
