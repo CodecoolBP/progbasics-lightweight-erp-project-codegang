@@ -29,7 +29,33 @@ def start_module():
         None
     """
 
-    # you code
+    # your code
+    table = data_manager.get_table_from_file("accounting/items_test.csv")
+    options = (["Show table",
+                "Add to table",
+                "Remove from table",
+                "Update the table",
+                "Year of the highest profit",
+                "Average profit per item in given year"])
+    ui.print_menu("Accounting menu", options, "Back to main menu")
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        remove(table, id)
+    elif option == "4":
+        update(table, id)
+    elif option == "5":
+        pass
+    elif option == "6":
+        pass
+    elif option == "0":
+        pass                       #ui.print_menu("Main menu", options, "Exit program")
+    else:
+        raise KeyError("There is no such option.")
 
 
 def show_table(table):
@@ -44,7 +70,19 @@ def show_table(table):
     """
 
     # your code
+    title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
+    table = data_manager.get_table_from_file("accounting/items_test.csv")
+    ui.print_table(table, title_list)
+    start_module()
 
+"""Data table structure:
+    * id (string): Unique and random generated identifier
+        at least 2 special characters (except: ';'), 2 number, 2 lower and 2 upper case letters)
+    * month (number): Month of the transaction
+    * day (number): Day of the transaction
+    * year (number): Year of the transaction
+    * type (string): in = income, out = outflow
+    * amount (int): amount of transaction in USD"""
 
 def add(table):
     """
@@ -58,6 +96,14 @@ def add(table):
     """
 
     # your code
+    title_list = ["Month", "Day", "Year", "Type", "Amount"]
+    inputs = [] 
+    id_ = common.generate_random(table)
+    inputs.extend(ui.get_inputs(title_list, "Please provide the required information"))
+    inputs.insert(0,id_)
+    table.append(inputs)
+    data_manager.write_table_to_file("accounting/items_test.csv", table)
+    start_module()
 
     return table
 
@@ -75,6 +121,16 @@ def remove(table, id_):
     """
 
     # your code
+    value = False
+    id_ = input("ID of the record: ")
+    for lst in table:
+        if id_ in lst:
+            table.remove(lst)
+            value = True
+    if value == False:
+        print('not in table')
+    data_manager.write_table_to_file("accounting/items_test.csv", table)
+    start_module()
 
     return table
 
@@ -92,6 +148,18 @@ def update(table, id_):
     """
 
     # your code
+    counter = 0
+    id_ = input("ID of the record: ")
+    for lst in table:
+        counter += 1
+        if id_ in lst:
+            table[counter-1][3] = input("Month: ")
+            table[counter-1][4] = input("Day: ")
+            table[counter-1][5] = input("Year: ")
+            table[counter-1][4] = input("Type: ")
+            table[counter-1][5] = input("Amount: ")
+    data_manager.write_table_to_file("accounting/items_test.csv", table)
+    start_module()
 
     return table
 
@@ -111,6 +179,12 @@ def which_year_max(table):
     """
 
     # your code
+    yearly_profit = 0
+    for lst in table:
+        counter += 1
+        if id_ in lst:
+        
+
 
 
 def avg_amount(table, year):
