@@ -119,16 +119,17 @@ def update(table, id_):
         list: table with updated record
     """
     
-    id_index = None
+    id_index = 0
     wrong_id = True
     while wrong_id:
         id_ = ui.get_inputs(["ID: "], "Choose an ID to remove: ")
         for row in table:
             if row[0] == id_[0]:
-                id_index = row.index(id_[0])
                 table[id_index] = ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the necessary information: ")
+                table[id_index].insert(0, id_[0])
                 wrong_id = False
-    table[id_index].insert(0, id_[0])
+            else:
+                id_index += 1
     data_manager.write_table_to_file("crm/customers_test.csv", table)
     start_module()
     return table

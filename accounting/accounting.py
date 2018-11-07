@@ -183,6 +183,7 @@ def which_year_max(table):
     for lst in table:
         counter += 1
         if id_ in lst:
+            pass
         
 
 
@@ -198,5 +199,5 @@ def avg_amount(table, year):
     Returns:
         number
     """
-
+    pass
     # your code
