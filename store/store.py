@@ -128,7 +128,7 @@ def update(table, id_):
     Returns:
         list: table with updated record
 
-    id_index = 0
+    id_index = 0           #Reka's old function, in case of bug
     inputs = []
     id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
     for row in table:

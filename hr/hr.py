@@ -46,7 +46,7 @@ def start_module():
     elif option == "4":
         update(table, id)
     elif option == "5":
-        pass
+        get_oldest_person(table)
     elif option == "6":
         pass
     elif option == "0":
@@ -138,7 +138,8 @@ def update(table, id_):
         id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
         for row in table:
             if row[0] == id_[0]:
-                table[id_index] = ui.get_inputs(["Name: ","Year: "], "Please provide the necessary information: ")
+                table[id_index] = ui.get_inputs(["Name: ", "Year: "], "Please provide the necessary information: ")
+                inputs(["Name: ","Year: "], "Please provide the necessary information: ")
                 table[id_index].insert(0, id_[0])
                 wrong_id = False
             else:
@@ -153,7 +154,7 @@ def update(table, id_):
 def get_oldest_person(table):
     """
     Question: Who is the oldest person?
-z
+
     Args:
         table (list): data table to work on
 
@@ -162,6 +163,19 @@ z
     """
 
     # your code
+    year_of_oldest = 2180
+    name_of_oldest = []
+    for lst in table:
+        a = int(lst[2])
+        if year_of_oldest > a:
+            year_of_oldest = a
+    for lst in table:
+        year_of_oldest = str(year_of_oldest)
+        if year_of_oldest in lst:
+            name_of_oldest.append(lst[0])
+    ui.print_result(name_of_oldest, "Oldest Person: ")
+
+
 
 
 def get_persons_closest_to_average(table):
