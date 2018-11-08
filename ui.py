@@ -29,8 +29,6 @@ def print_table(table, title_list):
             if longest_data_list[row] < len(table[column][row]):
                 longest_data_list[row] = len(table[column][row])
 
-    print(longest_data_list)
-
     for i in range(len(longest_data_list)):
         longest_data_list[i] += 1
 
@@ -40,7 +38,6 @@ def print_table(table, title_list):
         line_lenght += k
     line_lenght += len(longest_data_list) * 3 + 3
 
-    print(line_lenght)
     for k in range(line_lenght):
         print('-', end='')
     print('')

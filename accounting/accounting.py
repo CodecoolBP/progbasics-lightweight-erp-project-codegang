@@ -51,7 +51,7 @@ def start_module():
     elif option == "5":
         ui.print_result(which_year_max(table),"Best year")
     elif option == "6":
-        pass
+        ui.print_result(avg_amount(table, ui.get_inputs(["Please enter a year: "], "")),"Average amount")
     elif option == "0":
         pass                       #ui.print_menu("Main menu", options, "Exit program")
     else:
@@ -224,25 +224,19 @@ def avg_amount(table, year):
     """
 
     # your code
-    best_year = ""
-    highest_profit = 0
-    yearly_profit = {}
+    
+    given_year = year[0]
+    profit = 0
+    counter = 0
     for line in table:
         year = line[3]
         in_or_out = line[4]
         amount = int(line[5])
-        if year not in yearly_profit:
+        if year == given_year:
+            counter += 1
             if in_or_out == "in":
-                yearly_profit[year] = amount
+                profit += amount
             else:
-                yearly_profit[year] = 0-amount
-        else:
-            if in_or_out == "in":
-                yearly_profit[year] += amount
-            else:
-                yearly_profit[year] -= amount
-    for year in yearly_profit:
-        if yearly_profit[year] > highest_profit:
-            highest_profit = yearly_profit[year]
-            best_year = year
-    return best_year
+                profit -= amount
+    avg = profit/counter
+    return avg
