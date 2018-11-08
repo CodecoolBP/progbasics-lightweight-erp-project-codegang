@@ -121,14 +121,13 @@ def remove(table, id_):
     """
 
     # your code
-    value = False
-    id_ = input("ID of the record: ")
-    for lst in table:
-        if id_ in lst:
-            table.remove(lst)
-            value = True
-    if value == False:
-        print('not in table')
+    wrong_id = True
+    while wrong_id:
+        id_ = ui.get_inputs(["ID: "], "Choose an ID to remove: ")
+        for row in table:
+            if row[0] == id_[0]:
+                table.remove(row)
+                wrong_id = False
     data_manager.write_table_to_file("accounting/items_test.csv", table)
     start_module()
 
@@ -148,18 +147,26 @@ def update(table, id_):
     """
 
     # your code
-    counter = 0
-    id_ = input("ID of the record: ")
-    for lst in table:
-        counter += 1
-        if id_ in lst:
-            table[counter-1][3] = input("Month: ")
-            table[counter-1][4] = input("Day: ")
-            table[counter-1][5] = input("Year: ")
-            table[counter-1][4] = input("Type: ")
-            table[counter-1][5] = input("Amount: ")
+    
+    id_index = 0
+    wrong_id = True
+    while wrong_id:
+        id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+        for row in table:
+            if row[0] == id_[0]:
+                table[id_index] = ui.get_inputs(["Month", "Day", "Year", "Type", "Amount"], "Please provide the necessary information: ")
+                table[id_index].insert(0, id_[0])
+                wrong_id = False
+            else:
+                id_index += 1
     data_manager.write_table_to_file("accounting/items_test.csv", table)
     start_module()
+
+#     * month (number): Month of the transaction
+#     * day (number): Day of the transaction
+#     * year (number): Year of the transaction
+#     * type (string): in = income, out = outflow
+#     * amount (int): amount of transaction in USD
 
     return table
 
@@ -215,6 +222,27 @@ def avg_amount(table, year):
     Returns:
         number
     """
-    pass
+
     # your code
-    
+    best_year = ""
+    highest_profit = 0
+    yearly_profit = {}
+    for line in table:
+        year = line[3]
+        in_or_out = line[4]
+        amount = int(line[5])
+        if year not in yearly_profit:
+            if in_or_out == "in":
+                yearly_profit[year] = amount
+            else:
+                yearly_profit[year] = 0-amount
+        else:
+            if in_or_out == "in":
+                yearly_profit[year] += amount
+            else:
+                yearly_profit[year] -= amount
+    for year in yearly_profit:
+        if yearly_profit[year] > highest_profit:
+            highest_profit = yearly_profit[year]
+            best_year = year
+    return best_year

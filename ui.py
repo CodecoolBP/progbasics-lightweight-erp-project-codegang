@@ -24,22 +24,23 @@ def print_table(table, title_list):
 
     longest_data_list = []
     for row in range(len(table[0])):
-        longest_data_list.append(len(table[0][row]))
+        longest_data_list.append(len(title_list[row]))
         for column in range(len(title_list)):
             if longest_data_list[row] < len(table[column][row]):
                 longest_data_list[row] = len(table[column][row])
 
-    #print(longest_data_list)
+    print(longest_data_list)
 
     for i in range(len(longest_data_list)):
-        longest_data_list[i] += 2
+        longest_data_list[i] += 1
 
     line_lenght = 0
 
     for k in longest_data_list:
         line_lenght += k
-    line_lenght += len(table) * 3 + 3
+    line_lenght += len(longest_data_list) * 3 + 3
 
+    print(line_lenght)
     for k in range(line_lenght):
         print('-', end='')
     print('')
