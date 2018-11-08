@@ -42,3 +42,12 @@ def generate_random(table):
 
     return generated
 
+def sort_abc(str1, str2):
+    if str2.startswith(str1) and len(str1) < len(str2):
+        return True
+    elif str1.startswith(str2) and len(str2) < len(str1):
+        return False
+    if str1[0] == str2[0]:
+        return sort_abc(str1[1:], str2[1:])
+    else:
+        return str1[0] < str2[0]
