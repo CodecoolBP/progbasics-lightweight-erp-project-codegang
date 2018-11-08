@@ -154,12 +154,14 @@ def get_longest_name_id(table):
                 the last by alphabetical order of the names)
         """
 
-    longest_name = 0
+    longest_name_lenght = 0
+    longest_name = ""
     for rows in table:
         row = rows.split(";")
-        for data in row:
-            data[1] += longest_name
-
+        if len(row[1]) > longest_name_lenght:
+            len(row[1]) = longest_name_lenght
+            longest_name = row[1]
+    return longest_name
 
 # the question: Which customers has subscribed to the newsletter?
 # return type: list of strings (where string is like email+separator+name, separator=";")
