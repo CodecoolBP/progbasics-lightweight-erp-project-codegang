@@ -1,10 +1,11 @@
-""" Human resources module
+""" Customer Relationship Management (CRM) module
 
 Data table structure:
     * id (string): Unique and random generated identifier
         at least 2 special characters (except: ';'), 2 number, 2 lower and 2 upper case letters)
     * name (string)
-    * birth_year (number)
+    * email (string)
+    * subscribed (int): Is she/he subscribed to the newsletter? 1/0 = yes/no
 """
 
 # everything you'll need is imported:
@@ -16,8 +17,6 @@ import data_manager
 import common
 
 
-
-
 def start_module():
     """
     Starts this module and displays its menu.
@@ -27,14 +26,15 @@ def start_module():
     Returns:
         None
     """
-    table = data_manager.get_table_from_file("hr/persons_test.csv")
+
+    table = data_manager.get_table_from_file("crm/customers.csv")
     options = (["Show table",
                 "Add to table",
                 "Remove from table",
-                "Update the table",
-                "Get oldest person",
-                "Get person close to avarage"])
-    ui.print_menu("HR menu", options, "Back to main menu")
+                "Update table",
+                "Get lonest name ID",
+                "Get subscribed e-mails"])
+    ui.print_menu("Customer Relationship management", options, "Back to main manu")
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
@@ -45,16 +45,6 @@ def start_module():
         remove(table, id)
     elif option == "4":
         update(table, id)
-    elif option == "5":
-        pass
-    elif option == "6":
-        pass
-    elif option == "0":
-        pass                       #ui.print_menu("Main menu", options, "Exit program")
-    else:
-        raise KeyError("There is no such option.")
-
-    # your code"""
 
 
 def show_table(table):
@@ -67,11 +57,11 @@ def show_table(table):
     Returns:
         None
     """
-    title_list = ["ID", "Name", "Year"]
-    ui.print_table(table, title_list)
-    start_module()
 
-    # your code
+    titles = ["ID", "Name", "Email", "Subscribed"]
+    table = data_manager.get_table_from_file("crm/customers_test.csv")
+    ui.print_table(table, titles)
+    start_module()
 
 
 def add(table):
@@ -85,16 +75,13 @@ def add(table):
         list: Table with a new record
     """
 
-    title_list = ["Name: ", "Year: "]
-    inputs = [] 
-    id_ = common.generate_random(table)
-    inputs.extend(ui.get_inputs(title_list, "Please provide the required information:"))
-    inputs.insert(0,id_)
-    table.append(inputs)
-    data_manager.write_table_to_file("hr/persons_test.csv", table)
+    new_data = []
+    new_data.append(common.generate_random(table))
+    new_data.extend(ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the necessary information: "))
+    table.append(new_data)
+    data_manager.write_table_to_file("crm/customers_test.csv", table)
     start_module()
-    return table
-
+    
 
 
 def remove(table, id_):
@@ -108,14 +95,14 @@ def remove(table, id_):
     Returns:
         list: Table without specified record.
     """
-
-    title_list = ["ID: "]
-    inputs = []
-    inputs.extend(ui.get_inputs(title_list, "ID of removable person:"))
-    for lst in table:
-        if inputs[0] in lst:
-            table.remove(lst)
-    data_manager.write_table_to_file("hr/persons_test.csv", table)
+    wrong_id = True
+    while wrong_id:
+        id_ = ui.get_inputs(["ID: "], "Choose an ID to remove: ")
+        for row in table:
+            if row[0] == id_[0]:
+                table.remove(row)
+                wrong_id = False
+    data_manager.write_table_to_file("crm/customers_test.csv", table)
     start_module()
     return table
 
@@ -135,44 +122,48 @@ def update(table, id_):
     id_index = 0
     wrong_id = True
     while wrong_id:
-        id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+        id_ = ui.get_inputs(["ID: "], "Choose an ID to remove: ")
         for row in table:
             if row[0] == id_[0]:
-                table[id_index] = ui.get_inputs(["Name: ","Year: "], "Please provide the necessary information: ")
+                table[id_index] = ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the necessary information: ")
                 table[id_index].insert(0, id_[0])
                 wrong_id = False
             else:
                 id_index += 1
-    data_manager.write_table_to_file("hr/persons_test.csv", table)
+    data_manager.write_table_to_file("crm/customers_test.csv", table)
     start_module()
     return table
+
 
 # special functions:
 # ------------------
 
-def get_oldest_person(table):
+def get_longest_name_id(table):
     """
-    Question: Who is the oldest person?
-z
-    Args:
-        table (list): data table to work on
+        Question: What is the id of the customer with the longest name?
 
-    Returns:
-        list: A list of strings (name or names if there are two more with the same value)
-    """
+        Args:
+            table (list): data table to work on
+
+        Returns:
+            string: id of the longest name (if there are more than one, return
+                the last by alphabetical order of the names)
+        """
 
     # your code
 
 
-def get_persons_closest_to_average(table):
+# the question: Which customers has subscribed to the newsletter?
+# return type: list of strings (where string is like email+separator+name, separator=";")
+def get_subscribed_emails(table):
     """
-    Question: Who is the closest to the average age?
+        Question: Which customers has subscribed to the newsletter?
 
-    Args:
-        table (list): data table to work on
+        Args:
+            table (list): data table to work on
 
-    Returns:
-        list: list of strings (name or names if there are two more with the same value)
-    """
+        Returns:
+            list: list of strings (where a string is like "email;name")
+        """
 
     # your code
