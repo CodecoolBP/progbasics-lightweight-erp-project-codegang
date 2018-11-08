@@ -42,3 +42,12 @@ def generate_random(table):
 
     return generated
 
+
+def abc_sort(words):
+    for i in range(len(words)-1, 0, -1):
+        for j in range(i):
+            if words[j] > words[j + 1]:
+                b = words[j]
+                words[j] = words[j + 1]
+                words[j + 1] = b
+    return words
