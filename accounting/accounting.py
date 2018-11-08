@@ -215,6 +215,6 @@ def avg_amount(table, year):
     Returns:
         number
     """
-
+    pass
     # your code
     

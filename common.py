@@ -39,3 +39,4 @@ def generate_random(table):
     # your code
 
     return generated
+
