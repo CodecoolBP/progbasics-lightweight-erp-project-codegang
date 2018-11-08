@@ -66,7 +66,7 @@ def show_table(table):
         None
     """
 
-    title_list = ["Title", "Manufacturer", "Price", "Stock"]
+    title_list = ["ID", "Title", "Manufacturer", "Price", "Stock"]
     table = data_manager.get_table_from_file("store/games_test.csv")
     ui.print_table(table, title_list)
     start_module()
