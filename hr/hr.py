@@ -48,7 +48,7 @@ def start_module():
     elif option == "5":
         get_oldest_person(table)
     elif option == "6":
-        pass
+        get_persons_closest_to_average(table)
     elif option == "0":
         pass                       #ui.print_menu("Main menu", options, "Exit program")
     else:
@@ -188,5 +188,28 @@ def get_persons_closest_to_average(table):
     Returns:
         list: list of strings (name or names if there are two more with the same value)
     """
+    avarage_of_years = 0
+    name_of_avarage = []
+    smallest_diff = 100
+    for lst in table:
+        a = int(lst[2])
+        avarage_of_years += a
+    avarage_of_years = round(avarage_of_years / len(table))
+    for lst in table:
+        if avarage_of_years in lst:
+            name_of_avarage.append(lst[1])
+        elif avarage_of_years not in lst:
+            diff = int(lst[2]) - avarage_of_years
+            if diff < 0:
+                diff = diff * -1 
+            if diff < smallest_diff:
+                smallest_diff = diff
+    for lst in table:
+        smallest_diff_neg = str(avarage_of_years - smallest_diff)
+        smallest_diff_poz = str(avarage_of_years + smallest_diff)
+        if (smallest_diff_neg or smallest_diff_poz) in lst:
+            name_of_avarage.append(lst[1])
+    ui.print_result(name_of_avarage, "Person(s) closest to avarage")
+
 
     # your code
