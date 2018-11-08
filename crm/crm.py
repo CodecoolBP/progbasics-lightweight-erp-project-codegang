@@ -156,15 +156,21 @@ def get_longest_name_id(table):
 
     longest_name_lenght = 0
     longest_name_id = ""
+    longest_names = []
     for row in table:
         if len(row[1]) > longest_name_lenght:
             longest_name_lenght = len(row[1])
+    for row in table:
+        if len(row[1]) == longest_name_lenght:
+            longest_names.append(row[1])
+    common.abc_sort(longest_names)
+    for row in table:
+        if longest_names[-1] in row:
             longest_name_id = row[0]
     ui.print_result(longest_name_id, "The longest name's ID is")
     start_module()
 
-# the question: Which customers has subscribed to the newsletter?
-# return type: list of strings (where string is like email+separator+name, separator=";")
+
 def get_subscribed_emails(table):
     """
         Question: Which customers has subscribed to the newsletter?
@@ -176,4 +182,11 @@ def get_subscribed_emails(table):
             list: list of strings (where a string is like "email;name")
         """
 
-    # your code
+    emails_and_names = ""
+    for row in table:
+        if row[-1] == "1":
+            emails_and_names += (row[-2] + ";" + row[1] + ",")
+    emails_and_names = emails_and_names.strip(",")
+    emails_and_names = emails_and_names.split(",")
+    ui.print_result(list(emails_and_names), "The data list is")
+    start_module()
