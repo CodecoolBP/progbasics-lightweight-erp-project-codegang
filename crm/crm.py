@@ -27,7 +27,7 @@ def start_module():
         None
     """
 
-    table = data_manager.get_table_from_file("crm/customers.csv")
+    table = data_manager.get_table_from_file("crm/customers_test.csv")
     options = (["Show table",
                 "Add to table",
                 "Remove from table",
@@ -81,7 +81,7 @@ def add(table):
     table.append(new_data)
     data_manager.write_table_to_file("crm/customers_test.csv", table)
     start_module()
-    
+    return table
 
 
 def remove(table, id_):
@@ -122,7 +122,7 @@ def update(table, id_):
     id_index = 0
     wrong_id = True
     while wrong_id:
-        id_ = ui.get_inputs(["ID: "], "Choose an ID to remove: ")
+        id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
         for row in table:
             if row[0] == id_[0]:
                 table[id_index] = ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the necessary information: ")
