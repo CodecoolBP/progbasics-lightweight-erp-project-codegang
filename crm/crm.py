@@ -32,7 +32,7 @@ def start_module():
                 "Add to table",
                 "Remove from table",
                 "Update table",
-                "Get lonest name ID",
+                "Get longest name ID",
                 "Get subscribed e-mails"])
     ui.print_menu("Customer Relationship management", options, "Back to main manu")
     inputs = ui.get_inputs(["Please enter a number: "], "")
@@ -45,6 +45,10 @@ def start_module():
         remove(table, id)
     elif option == "4":
         update(table, id)
+    elif option == "5":
+        get_longest_name_id(table)
+    elif option == "6":
+        get_subscribed_emails(table)
 
 
 def show_table(table):
@@ -150,7 +154,11 @@ def get_longest_name_id(table):
                 the last by alphabetical order of the names)
         """
 
-    # your code
+    longest_name = 0
+    for rows in table:
+        row = rows.split(";")
+        for data in row:
+            data[1] += longest_name
 
 
 # the question: Which customers has subscribed to the newsletter?
