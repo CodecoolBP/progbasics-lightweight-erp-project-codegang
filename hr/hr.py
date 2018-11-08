@@ -16,6 +16,8 @@ import data_manager
 import common
 
 
+
+
 def start_module():
     """
     Starts this module and displays its menu.
@@ -52,7 +54,7 @@ def start_module():
     else:
         raise KeyError("There is no such option.")
 
-    # your code
+    # your code"""
 
 
 def show_table(table):
@@ -129,22 +131,21 @@ def update(table, id_):
     Returns:
         list: table with updated record
     """
-
+    
     id_index = 0
-    inputs = []
-    id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
-    for row in table:
-        if row[0] == id_[0]:
-            inputs.extend(ui.get_inputs(["Name: ","Year: "], "Please provide the necessary information: "))
-            for i in range(len(inputs)):
-                table[id_index][i+1] = inputs[i-1]
-        else:    
-            id_index += 1
+    wrong_id = True
+    while wrong_id:
+        id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+        for row in table:
+            if row[0] == id_[0]:
+                table[id_index] = ui.get_inputs(["Name: ","Year: "], "Please provide the necessary information: ")
+                table[id_index].insert(0, id_[0])
+                wrong_id = False
+            else:
+                id_index += 1
     data_manager.write_table_to_file("hr/persons_test.csv", table)
     start_module()
     return table
-
-
 
 # special functions:
 # ------------------

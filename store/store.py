@@ -127,7 +127,6 @@ def update(table, id_):
 
     Returns:
         list: table with updated record
-    """
 
     id_index = 0
     inputs = []
@@ -139,6 +138,21 @@ def update(table, id_):
                 table[id_index][i+1] = inputs[i-1]
         else:    
             id_index += 1
+    data_manager.write_table_to_file("store/games_test.csv", table)
+    start_module()
+    return table"""
+
+    id_index = 0
+    wrong_id = True
+    while wrong_id:
+        id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+        for row in table:
+            if row[0] == id_[0]:
+                table[id_index] = ui.get_inputs(["Title: ", "Manufacturer: ", "Price: ", "Stock: "], "Please provide the necessary information: ")
+                table[id_index].insert(0, id_[0])
+                wrong_id = False
+            else:
+                id_index += 1
     data_manager.write_table_to_file("store/games_test.csv", table)
     start_module()
     return table

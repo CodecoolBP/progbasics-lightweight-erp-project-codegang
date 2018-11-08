@@ -3,7 +3,9 @@ implement commonly used functions here
 """
 
 import random
-
+import ui
+import data_manager
+import hr
 
 def generate_random(table):
     """
