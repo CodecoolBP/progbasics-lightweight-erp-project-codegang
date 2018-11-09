@@ -47,7 +47,7 @@ def start_module():
     elif option == "4":
         update(table, id)
     elif option == "5":
-        pass
+        ui.print_result(get_lowest_price_item_id(table), "Lowest price item's ID")
     elif option == "6":
         pass
     elif option == "0":
@@ -127,7 +127,7 @@ def update(table, id_):
 
     Returns:
         list: table with updated record
-    """
+
 
     id_index = 0
     inputs = []
@@ -141,7 +141,23 @@ def update(table, id_):
             id_index += 1
     data_manager.write_table_to_file("sales/sales_test.csv", table)
     start_module()
+    return table"""
+    
+    id_index = 0
+    wrong_id = True
+    while wrong_id:
+        id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+        for row in table:
+            if row[0] == id_[0]:
+                table[id_index] = ui.get_inputs(["Title: ", "Price: ", "Month: ", "Day: ", "Year: "], "Please provide the necessary information: ")
+                table[id_index].insert(0, id_[0])
+                wrong_id = False
+            else:
+                id_index += 1
+    data_manager.write_table_to_file("sales/sales_test.csv", table)
+    start_module()
     return table
+
 
 
 # special functions:
@@ -160,6 +176,21 @@ def get_lowest_price_item_id(table):
     """
 
     # your code
+    lowest_id = table[0][0]
+    lowest_title = table[0][1]
+    lowest_price = int(table[0][2])
+    for line in table:
+        id_ = line[0]
+        title = line[1]
+        price = int(line[2])
+        if price < lowest_price:
+            lowest_id = id_
+            lowest_price = price
+            lowest_title = title
+        if price == lowest_price and title > lowest_title:
+            lowest_title = title
+            lowest_id = id_
+    return lowest_id
 
 
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):

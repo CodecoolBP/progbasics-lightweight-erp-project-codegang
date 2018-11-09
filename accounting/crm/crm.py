@@ -27,12 +27,12 @@ def start_module():
         None
     """
 
-    table = data_manager.get_table_from_file("crm/customers_test.csv")
+    table = data_manager.get_table_from_file("crm/customers.csv")
     options = (["Show table",
                 "Add to table",
                 "Remove from table",
                 "Update table",
-                "Get longest name ID",
+                "Get lonest name ID",
                 "Get subscribed e-mails"])
     ui.print_menu("Customer Relationship management", options, "Back to main manu")
     inputs = ui.get_inputs(["Please enter a number: "], "")
@@ -45,10 +45,6 @@ def start_module():
         remove(table, id)
     elif option == "4":
         update(table, id)
-    elif option == "5":
-        get_longest_name_id(table)
-    elif option == "6":
-        get_subscribed_emails(table)
 
 
 def show_table(table):
@@ -81,11 +77,11 @@ def add(table):
 
     new_data = []
     new_data.append(common.generate_random(table))
-    new_data.extend(ui.get_inputs(["Name: ", "Email: ", "Subscribed: "], "Please provide the necessary information: "))
+    new_data.extend(ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the necessary information: "))
     table.append(new_data)
     data_manager.write_table_to_file("crm/customers_test.csv", table)
     start_module()
-    return table
+    
 
 
 def remove(table, id_):
@@ -126,10 +122,10 @@ def update(table, id_):
     id_index = 0
     wrong_id = True
     while wrong_id:
-        id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+        id_ = ui.get_inputs(["ID: "], "Choose an ID to remove: ")
         for row in table:
             if row[0] == id_[0]:
-                table[id_index] = ui.get_inputs(["Name: ", "Email: ", "Subscribed: "], "Please provide the necessary information: ")
+                table[id_index] = ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the necessary information: ")
                 table[id_index].insert(0, id_[0])
                 wrong_id = False
             else:
@@ -154,23 +150,11 @@ def get_longest_name_id(table):
                 the last by alphabetical order of the names)
         """
 
-    longest_name_lenght = 0
-    longest_name_id = ""
-    longest_names = []
-    for row in table:
-        if len(row[1]) > longest_name_lenght:
-            longest_name_lenght = len(row[1])
-    for row in table:
-        if len(row[1]) == longest_name_lenght:
-            longest_names.append(row[1])
-    common.abc_sort(longest_names)
-    for row in table:
-        if longest_names[-1] in row:
-            longest_name_id = row[0]
-    ui.print_result(longest_name_id, "The longest name's ID is")
-    start_module()
+    # your code
 
 
+# the question: Which customers has subscribed to the newsletter?
+# return type: list of strings (where string is like email+separator+name, separator=";")
 def get_subscribed_emails(table):
     """
         Question: Which customers has subscribed to the newsletter?
@@ -182,11 +166,4 @@ def get_subscribed_emails(table):
             list: list of strings (where a string is like "email;name")
         """
 
-    emails_and_names = ""
-    for row in table:
-        if row[-1] == "1":
-            emails_and_names += (row[-2] + ";" + row[1] + ",")
-    emails_and_names = emails_and_names.strip(",")
-    emails_and_names = emails_and_names.split(",")
-    ui.print_result(list(emails_and_names), "The data list is")
-    start_module()
+    # your code

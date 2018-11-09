@@ -16,6 +16,8 @@ import data_manager
 import common
 
 
+
+
 def start_module():
     """
     Starts this module and displays its menu.
@@ -44,15 +46,15 @@ def start_module():
     elif option == "4":
         update(table, id)
     elif option == "5":
-        pass
+        get_oldest_person(table)
     elif option == "6":
-        pass
+        get_persons_closest_to_average(table)
     elif option == "0":
         pass                       #ui.print_menu("Main menu", options, "Exit program")
     else:
         raise KeyError("There is no such option.")
 
-    # your code
+    # your code"""
 
 
 def show_table(table):
@@ -129,22 +131,22 @@ def update(table, id_):
     Returns:
         list: table with updated record
     """
-
+    
     id_index = 0
-    inputs = []
-    id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
-    for row in table:
-        if row[0] == id_[0]:
-            inputs.extend(ui.get_inputs(["Name: ","Year: "], "Please provide the necessary information: "))
-            for i in range(len(inputs)):
-                table[id_index][i+1] = inputs[i-1]
-        else:    
-            id_index += 1
+    wrong_id = True
+    while wrong_id:
+        id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+        for row in table:
+            if row[0] == id_[0]:
+                table[id_index] = ui.get_inputs(["Name: ", "Year: "], "Please provide the necessary information: ")
+                inputs(["Name: ","Year: "], "Please provide the necessary information: ")
+                table[id_index].insert(0, id_[0])
+                wrong_id = False
+            else:
+                id_index += 1
     data_manager.write_table_to_file("hr/persons_test.csv", table)
     start_module()
     return table
-
-
 
 # special functions:
 # ------------------
@@ -152,7 +154,7 @@ def update(table, id_):
 def get_oldest_person(table):
     """
     Question: Who is the oldest person?
-z
+
     Args:
         table (list): data table to work on
 
@@ -161,6 +163,19 @@ z
     """
 
     # your code
+    year_of_oldest = 2180
+    name_of_oldest = []
+    for lst in table:
+        a = int(lst[2])
+        if year_of_oldest > a:
+            year_of_oldest = a
+    for lst in table:
+        year_of_oldest = str(year_of_oldest)
+        if year_of_oldest in lst:
+            name_of_oldest.append(lst[0])
+    ui.print_result(name_of_oldest, "Oldest Person: ")
+
+
 
 
 def get_persons_closest_to_average(table):
@@ -173,5 +188,28 @@ def get_persons_closest_to_average(table):
     Returns:
         list: list of strings (name or names if there are two more with the same value)
     """
+    avarage_of_years = 0
+    name_of_avarage = []
+    smallest_diff = 100
+    for lst in table:
+        a = int(lst[2])
+        avarage_of_years += a
+    avarage_of_years = round(avarage_of_years / len(table))
+    for lst in table:
+        if avarage_of_years in lst:
+            name_of_avarage.append(lst[1])
+        elif avarage_of_years not in lst:
+            diff = int(lst[2]) - avarage_of_years
+            if diff < 0:
+                diff = diff * -1 
+            if diff < smallest_diff:
+                smallest_diff = diff
+    for lst in table:
+        smallest_diff_neg = str(avarage_of_years - smallest_diff)
+        smallest_diff_poz = str(avarage_of_years + smallest_diff)
+        if (smallest_diff_neg or smallest_diff_poz) in lst:
+            name_of_avarage.append(lst[1])
+    ui.print_result(name_of_avarage, "Person(s) closest to avarage")
+
 
     # your code
