@@ -112,16 +112,18 @@ def update(table, id_):
     Returns:
         list: table with updated record
     """
-    counter = 0
-    id_ = input("ID of the record: ")
-    for lst in table:
-        counter += 1
-        if id_ in lst:
-            table[counter][1] = input("Title: ")
-            table[counter][2] = input("Price: ")
-            table[counter][3] = input("Month: ")
-            table[counter][4] = input("Day: ")
-            table[counter][5] = input("Year: ")
+#     counter = 0
+#     id_ = input("ID of the record: ")
+#     for lst in table:
+#         counter += 1
+#         if id_ in lst:
+#             table[counter][1] = input("Title: ")
+#             table[counter][2] = input("Price: ")
+#             table[counter][3] = input("Month: ")
+#             table[counter][4] = input("Day: ")
+#             table[counter][5] = input("Year: ")
     
 
-update(table,id_)
+# update(table,id_)
+
+print("a"<"b")

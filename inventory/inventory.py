@@ -46,9 +46,10 @@ def start_module():
     elif option == "4":
         update(table, id)
     elif option == "5":
-        pass
+        title_list = ["ID", "Title", "Company", "Year", "Amount", "Availablity"]
+        ui.print_table(get_available_items(table), title_list)
     elif option == "6":
-        pass
+        ui.print_result(get_average_durability_by_manufacturers(table), "Average durability by manufacturers")
     elif option == "0":
         pass                       #ui.print_menu("Main menu", options, "Exit program")
     else:
@@ -161,7 +162,18 @@ def get_available_items(table):
     Returns:
         list: list of lists (the inner list contains the whole row with their actual data types)
     """
-
+    result = []
+    counter = 0
+    for row in table:
+        result.append(row)
+        purchase_year = int(row[-2])
+        durability = int(row[-1])
+        if purchase_year+durability >= 2018:
+            result[counter].append("Available")
+        else:
+            result[counter].append("Not available")
+        counter +=1
+    return result
     # your code
 
 
@@ -175,5 +187,18 @@ def get_average_durability_by_manufacturers(table):
     Returns:
         dict: a dictionary with this structure: { [manufacturer] : [avg] }
     """
-
+    counter = {}
+    result = {}
+    for row in table:
+        manufacturer = row[2]
+        durability = int(row[-1])
+        if manufacturer not in result:
+            result[manufacturer] = durability
+            counter[manufacturer] = 1
+        else:
+            result[manufacturer] += durability
+            counter[manufacturer] += 1
+    for key in counter:
+        result[key] = result[key]/counter[key]
+    return result
     # your code

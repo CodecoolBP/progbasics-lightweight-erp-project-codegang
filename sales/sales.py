@@ -178,7 +178,14 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     Returns:
         list: list of lists (the filtered table)
     """
+    # result = table
+    # for row in result:
+    #     month = row[-3]
+    #     day = row[-2]
+    #     year = row[-1]
+        
 
+    #     result.remove(row)
     # your code
 
 
