@@ -34,21 +34,24 @@ def start_module():
                 "Update table",
                 "Get longest name ID",
                 "Get subscribed e-mails"])
-    ui.print_menu("Customer Relationship management", options, "Back to main manu")
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        show_table(table)
-    elif option == "2":
-        add(table)
-    elif option == "3":
-        remove(table, id)
-    elif option == "4":
-        update(table, id)
-    elif option == "5":
-        get_longest_name_id(table)
-    elif option == "6":
-        get_subscribed_emails(table)
+    while True:
+        ui.print_menu("Customer Relationship management", options, "Back to main manu")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            remove(table, id)
+        elif option == "4":
+            update(table, id)
+        elif option == "5":
+            get_longest_name_id(table)
+        elif option == "6":
+            get_subscribed_emails(table)
+        elif option == "0":
+            break
 
 
 def show_table(table):
@@ -65,7 +68,6 @@ def show_table(table):
     titles = ["ID", "Name", "Email", "Subscribed"]
     table = data_manager.get_table_from_file("crm/customers_test.csv")
     ui.print_table(table, titles)
-    start_module()
 
 
 def add(table):
@@ -84,7 +86,6 @@ def add(table):
     new_data.extend(ui.get_inputs(["Name: ", "Email: ", "Subscribed: "], "Please provide the necessary information: "))
     table.append(new_data)
     data_manager.write_table_to_file("crm/customers_test.csv", table)
-    start_module()
     return table
 
 
@@ -107,7 +108,6 @@ def remove(table, id_):
                 table.remove(row)
                 wrong_id = False
     data_manager.write_table_to_file("crm/customers_test.csv", table)
-    start_module()
     return table
 
 
@@ -135,7 +135,6 @@ def update(table, id_):
             else:
                 id_index += 1
     data_manager.write_table_to_file("crm/customers_test.csv", table)
-    start_module()
     return table
 
 
@@ -163,12 +162,11 @@ def get_longest_name_id(table):
     for row in table:
         if len(row[1]) == longest_name_lenght:
             longest_names.append(row[1])
-    common.abc_sort(longest_names)
+    common.abc_order(longest_names)
     for row in table:
         if longest_names[-1] in row:
             longest_name_id = row[0]
     ui.print_result(longest_name_id, "The longest name's ID is")
-    start_module()
 
 
 def get_subscribed_emails(table):
@@ -189,4 +187,3 @@ def get_subscribed_emails(table):
     emails_and_names = emails_and_names.strip(",")
     emails_and_names = emails_and_names.split(",")
     ui.print_result(list(emails_and_names), "The data list is")
-    start_module()

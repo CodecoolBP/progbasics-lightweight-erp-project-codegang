@@ -37,25 +37,26 @@ def start_module():
                 "Update the table",
                 "Year of the highest profit",
                 "Average profit per item in given year"])
-    ui.print_menu("Accounting menu", options, "Back to main menu")
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        show_table(table)
-    elif option == "2":
-        add(table)
-    elif option == "3":
-        remove(table, id)
-    elif option == "4":
-        update(table, id)
-    elif option == "5":
-        ui.print_result(which_year_max(table),"Best year")
-    elif option == "6":
-        ui.print_result(avg_amount(table, ui.get_inputs(["Please enter a year: "], "")),"Average amount")
-    elif option == "0":
-        pass                       #ui.print_menu("Main menu", options, "Exit program")
-    else:
-        raise KeyError("There is no such option.")
+    while True:
+        ui.print_menu("Accounting menu", options, "Back to main menu")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            remove(table, id)
+        elif option == "4":
+            update(table, id)
+        elif option == "5":
+            ui.print_result(which_year_max(table),"Best year")
+        elif option == "6":
+            ui.print_result(avg_amount(table, ui.get_inputs(["Please enter a year: "], "")),"Average amount")
+        elif option == "0":
+            break                       #ui.print_menu("Main menu", options, "Exit program")
+        else:
+            raise KeyError("There is no such option.")
 
 
 def show_table(table):
@@ -73,7 +74,6 @@ def show_table(table):
     title_list = ["ID", "Month", "Day", "Year", "Type", "Amount"]
     table = data_manager.get_table_from_file("accounting/items_test.csv")
     ui.print_table(table, title_list)
-    start_module()
 
 """Data table structure:
     * id (string): Unique and random generated identifier
@@ -103,8 +103,6 @@ def add(table):
     inputs.insert(0,id_)
     table.append(inputs)
     data_manager.write_table_to_file("accounting/items_test.csv", table)
-    start_module()
-
     return table
 
 
@@ -129,8 +127,6 @@ def remove(table, id_):
                 table.remove(row)
                 wrong_id = False
     data_manager.write_table_to_file("accounting/items_test.csv", table)
-    start_module()
-
     return table
 
 
@@ -160,7 +156,6 @@ def update(table, id_):
             else:
                 id_index += 1
     data_manager.write_table_to_file("accounting/items_test.csv", table)
-    start_module()
 
 #     * month (number): Month of the transaction
 #     * day (number): Day of the transaction

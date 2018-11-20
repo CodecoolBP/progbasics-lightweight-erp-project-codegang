@@ -34,25 +34,26 @@ def start_module():
                 "Update the table",
                 "Get oldest person",
                 "Get person close to avarage"])
-    ui.print_menu("HR menu", options, "Back to main menu")
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        show_table(table)
-    elif option == "2":
-        add(table)
-    elif option == "3":
-        remove(table, id)
-    elif option == "4":
-        update(table, id)
-    elif option == "5":
-        get_oldest_person(table)
-    elif option == "6":
-        get_persons_closest_to_average(table)
-    elif option == "0":
-        pass                       #ui.print_menu("Main menu", options, "Exit program")
-    else:
-        raise KeyError("There is no such option.")
+    while True:
+        ui.print_menu("HR menu", options, "Back to main menu")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            remove(table, id)
+        elif option == "4":
+            update(table, id)
+        elif option == "5":
+            get_oldest_person(table)
+        elif option == "6":
+            get_persons_closest_to_average(table)
+        elif option == "0":
+            break                       #ui.print_menu("Main menu", options, "Exit program")
+        else:
+            raise KeyError("There is no such option.")
 
     # your code"""
 
@@ -69,7 +70,6 @@ def show_table(table):
     """
     title_list = ["ID", "Name", "Year"]
     ui.print_table(table, title_list)
-    start_module()
 
     # your code
 
@@ -92,7 +92,6 @@ def add(table):
     inputs.insert(0,id_)
     table.append(inputs)
     data_manager.write_table_to_file("hr/persons_test.csv", table)
-    start_module()
     return table
 
 
@@ -116,7 +115,6 @@ def remove(table, id_):
         if inputs[0] in lst:
             table.remove(lst)
     data_manager.write_table_to_file("hr/persons_test.csv", table)
-    start_module()
     return table
 
 
@@ -145,7 +143,6 @@ def update(table, id_):
             else:
                 id_index += 1
     data_manager.write_table_to_file("hr/persons_test.csv", table)
-    start_module()
     return table
 
 # special functions:
@@ -172,7 +169,7 @@ def get_oldest_person(table):
     for lst in table:
         year_of_oldest = str(year_of_oldest)
         if year_of_oldest in lst:
-            name_of_oldest.append(lst[0])
+            name_of_oldest.append(lst[1])
     ui.print_result(name_of_oldest, "Oldest Person: ")
 
 

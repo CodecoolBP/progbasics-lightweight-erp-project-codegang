@@ -43,7 +43,7 @@ def generate_random(table):
     return generated
 
 
-def abc_sort(words):
+def abc_order(words):
     for i in range(len(words)-1, 0, -1):
         for j in range(i):
             if words[j] > words[j + 1]:

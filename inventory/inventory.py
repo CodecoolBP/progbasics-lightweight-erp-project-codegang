@@ -34,26 +34,27 @@ def start_module():
                 "Update item",
                 "Available items",
                 "Average durability by manufacturers"])
-    ui.print_menu("Inventory menu", options, "Back to main menu")
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        show_table(table)
-    elif option == "2":
-        add(table)
-    elif option == "3":
-        remove(table, id)
-    elif option == "4":
-        update(table, id)
-    elif option == "5":
-        title_list = ["ID", "Title", "Company", "Year", "Amount", "Availablity"]
-        ui.print_table(get_available_items(table), title_list)
-    elif option == "6":
-        ui.print_result(get_average_durability_by_manufacturers(table), "Average durability by manufacturers")
-    elif option == "0":
-        pass                       #ui.print_menu("Main menu", options, "Exit program")
-    else:
-        raise KeyError("There is no such option.")
+    while True:
+        ui.print_menu("Inventory menu", options, "Back to main menu")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            remove(table, id)
+        elif option == "4":
+            update(table, id)
+        elif option == "5":
+            title_list = ["ID", "Title", "Company", "Year", "Amount", "Availablity"]
+            ui.print_table(get_available_items(table), title_list)
+        elif option == "6":
+            ui.print_result(get_average_durability_by_manufacturers(table), "Average durability by manufacturers")
+        elif option == "0":
+            break                       #ui.print_menu("Main menu", options, "Exit program")
+        else:
+            raise KeyError("There is no such option.")
     # your code
 
 
@@ -69,7 +70,6 @@ def show_table(table):
     """
     title_list = ["ID", "Title", "Company", "Year", "Amount"]
     ui.print_table(table, title_list)
-    start_module()
     # your code
 
 
@@ -90,7 +90,6 @@ def add(table):
     inputs.insert(0,id_)
     table.append(inputs)
     data_manager.write_table_to_file("inventory/inventory_test.csv", table)
-    start_module()
     return table
     # your code
 
@@ -115,7 +114,6 @@ def remove(table, id_):
         if inputs[0] in lst:
             table.remove(lst)
     data_manager.write_table_to_file("inventory/inventory_test.csv", table)
-    start_module()
     return table
     # your code
 
@@ -144,7 +142,6 @@ def update(table, id_):
         else:    
             id_index += 1
     data_manager.write_table_to_file("inventory/inventory_test.csv", table)
-    start_module()
     return table
 
 

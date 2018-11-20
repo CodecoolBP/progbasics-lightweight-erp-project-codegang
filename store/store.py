@@ -34,25 +34,26 @@ def start_module():
                 "Update the table",
                 "Counts games by manufacturer",
                 "Get items sold between dates"])
-    ui.print_menu("Store menu", options, "Back to main menu")
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        show_table(table)
-    elif option == "2":
-        add(table)
-    elif option == "3":
-        remove(table, id)
-    elif option == "4":
-        update(table, id)
-    elif option == "5":
-        pass
-    elif option == "6":
-        pass
-    elif option == "0":
-        pass                       #ui.print_menu("Main menu", options, "Exit program")
-    else:
-        raise KeyError("There is no such option.")
+    while True:
+        ui.print_menu("Store menu", options, "Back to main menu")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            remove(table, id)
+        elif option == "4":
+            update(table, id)
+        elif option == "5":
+            pass
+        elif option == "6":
+            pass
+        elif option == "0":
+            break                       #ui.print_menu("Main menu", options, "Exit program")
+        else:
+            raise KeyError("There is no such option.")
 
 
 def show_table(table):
@@ -69,7 +70,6 @@ def show_table(table):
     title_list = ["ID", "Title", "Manufacturer", "Price", "Stock"]
     table = data_manager.get_table_from_file("store/games_test.csv")
     ui.print_table(table, title_list)
-    start_module()
 
 
 def add(table):
@@ -90,7 +90,6 @@ def add(table):
     inputs.insert(0,id_)
     table.append(inputs)
     data_manager.write_table_to_file("store/games_test.csv", table)
-    start_module()
     return table
 
 
@@ -113,7 +112,6 @@ def remove(table, id_):
         if inputs[0] in lst:
             table.remove(lst)
     data_manager.write_table_to_file("store/games_test.csv", table)
-    start_module()
     return table
 
 
@@ -154,7 +152,6 @@ def update(table, id_):
             else:
                 id_index += 1
     data_manager.write_table_to_file("store/games_test.csv", table)
-    start_module()
     return table
 
 
