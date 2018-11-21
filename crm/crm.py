@@ -180,7 +180,6 @@ def get_subscribed_emails(table):
             list: list of strings (where a string is like "email;name")
         """
 
-<<<<<<< HEAD
     emails_and_names = ""
     for row in table:
         if row[-1] == "1":
@@ -190,7 +189,6 @@ def get_subscribed_emails(table):
     ui.print_result(list(emails_and_names), "The data list is")
     return list(emails_and_names)
 
-=======
     # your code
 
 
@@ -227,4 +225,3 @@ def get_name_by_id_from_table(table, id):
     """
 
     # your code
->>>>>>> 74c0000c8f539aa3d28c1f599b77ea12ac94b137
