@@ -47,7 +47,7 @@ def start_module():
         elif option == "4":
             update(table, id)
         elif option == "5":
-            pass
+            get_counts_by_manufacturers(table)
         elif option == "6":
             pass
         elif option == "0":
@@ -165,13 +165,24 @@ def get_counts_by_manufacturers(table):
     Question: How many different kinds of game are available of each manufacturer?
 
     Args:
-        table (list): data table to work on
+        table (print(result)rk on
 
     Returns:
-         dict: A dictionary with this structure: { [manufacturer] : [count] }
+         dict: print(result)structure: { [manufacturer] : [count] }
     """
 
-    # your code
+    # your codeprint(result)
+    result = {}
+    for i in table:
+        if i[2] not in result:
+            result[i[2]] = 0
+    for i in table:
+        if i[2] in result.keys():
+            result[i[2]] += 1
+    ui.print_result(result, 'Different kind of games in store of each manufacturer')
+
+            
+
 
 
 def get_average_by_manufacturer(table, manufacturer):

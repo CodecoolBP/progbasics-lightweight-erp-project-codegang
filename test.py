@@ -166,6 +166,7 @@ class HRTester(unittest.TestCase):
         result = hr.get_oldest_person(table)
         compare_lists(self, expected, result)
 
+
     def test_get_persons_closest_to_average(self):
         table = data_manager.get_table_from_file(self.data_file)
         expected = ["Jimmy Hendrix"]
