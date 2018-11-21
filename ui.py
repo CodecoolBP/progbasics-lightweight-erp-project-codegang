@@ -21,43 +21,45 @@ def print_table(table, title_list):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
+    try:
+        longest_data_list = []
+        for row in range(len(table[0])):
+            longest_data_list.append(len(title_list[row]))
+            for column in range(len(title_list)):
+                if longest_data_list[row] < len(table[column][row]):
+                    longest_data_list[row] = len(table[column][row])
 
-    longest_data_list = []
-    for row in range(len(table[0])):
-        longest_data_list.append(len(title_list[row]))
-        for column in range(len(title_list)):
-            if longest_data_list[row] < len(table[column][row]):
-                longest_data_list[row] = len(table[column][row])
+        for i in range(len(longest_data_list)):
+            longest_data_list[i] += 1
 
-    for i in range(len(longest_data_list)):
-        longest_data_list[i] += 1
+        line_lenght = 0
 
-    line_lenght = 0
+        for k in longest_data_list:
+            line_lenght += k
+        line_lenght += len(longest_data_list) * 3 + 3
 
-    for k in longest_data_list:
-        line_lenght += k
-    line_lenght += len(longest_data_list) * 3 + 3
-
-    for k in range(line_lenght):
-        print('-', end='')
-    print('')
-
-    print("|", end='')
-    for i in range(len(title_list)):
-        print("| {:^{space_length}} ".format(title_list[i], space_length=longest_data_list[i]), end='')
-    print('||')
-    for k in range(line_lenght):
-        print('-', end='')
-    print('')
-
-    for i in range(len(table)):
-        print("|", end='')
-        for j in range(len(table[i])):
-            print("| {:^{space_length}} ".format(table[i][j], space_length=longest_data_list[j]), end='')
-        print("||")
         for k in range(line_lenght):
             print('-', end='')
         print('')
+
+        print("|", end='')
+        for i in range(len(title_list)):
+            print("| {:^{space_length}} ".format(title_list[i], space_length=longest_data_list[i]), end='')
+        print('||')
+        for k in range(line_lenght):
+            print('-', end='')
+        print('')
+
+        for i in range(len(table)):
+            print("|", end='')
+            for j in range(len(table[i])):
+                print("| {:^{space_length}} ".format(table[i][j], space_length=longest_data_list[j]), end='')
+            print("||")
+            for k in range(line_lenght):
+                print('-', end='')
+            print('')
+    except:
+        print("Empty table")
 
 
 def print_result(result, label):
@@ -124,7 +126,7 @@ def get_inputs(list_labels, title):
     inputs = []
     print(title)
     for data in list_labels:
-        inputs.append(input(data))
+        inputs.append(input(data + ": "))
     return inputs
 
 

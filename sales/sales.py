@@ -37,7 +37,7 @@ def start_module():
                 "Get items sold between dates"])
     while True:
         ui.print_menu("Sales menu", options, "Back to main menu")
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["Please enter a number"], "")
         option = inputs[0]
         if option == "1":
             show_table(table)
@@ -50,7 +50,8 @@ def start_module():
         elif option == "5":
             ui.print_result(get_lowest_price_item_id(table), "Lowest price item's ID")
         elif option == "6":
-            pass
+            dates = ui.get_inputs(["Month from", "Day from", "Year from", "Month to", "Day to", "Year to"],"Please give dates")
+            show_table(get_items_sold_between(table, int(dates[0]), int(dates[1]), int(dates[2]), int(dates[3]), int(dates[4]), int(dates[5])))
         elif option == "0":
             break                       #ui.print_menu("Main menu", options, "Exit program")
         else:
@@ -68,7 +69,6 @@ def show_table(table):
         None
     """
     title_list = ["ID", "Title", "Price", "Month", "Day", "Year"]
-    table = data_manager.get_table_from_file("sales/sales_test.csv")
     ui.print_table(table, title_list)
 
 def add(table):
@@ -82,7 +82,7 @@ def add(table):
         list: Table with a new record
     """
 
-    title_list = ["Title: ", "Price: ", "Month: ", "Day: ", "Year: "]
+    title_list = ["Title", "Price", "Month", "Day", "Year"]
     inputs = [] 
     id_ = common.generate_random(table)
     inputs.extend(ui.get_inputs(title_list, "Please provide the required information"))
@@ -206,15 +206,18 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     Returns:
         list: list of lists (the filtered table)
     """
-    # result = table
-    # for row in result:
-    #     month = row[-3]
-    #     day = row[-2]
-    #     year = row[-1]
-        
-
-    #     result.remove(row)
-    # your code
+    from datetime import date
+    result = []
+    from_date = date(year_from, month_from, day_from)
+    to_date = date(year_to, month_to, day_to)
+    for row in table:
+        sale_month = int(row[3])
+        sale_day = int(row[4])
+        sale_year = int(row[5])
+        sale_date = date(sale_year, sale_month, sale_day)
+        if from_date <= sale_date <= to_date:
+            result.append(row)
+    return result
 
 
 

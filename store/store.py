@@ -36,7 +36,7 @@ def start_module():
                 "Get items sold between dates"])
     while True:
         ui.print_menu("Store menu", options, "Back to main menu")
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["Please enter a number"], "")
         option = inputs[0]
         if option == "1":
             show_table(table)
@@ -83,7 +83,7 @@ def add(table):
         list: Table with a new record
     """
 
-    title_list = ["Title: ", "Manufacturer: ", "Price: ", "Stock: "]
+    title_list = ["Title", "Manufacturer", "Price", "Stock"]
     inputs = [] 
     id_ = common.generate_random(table)
     inputs.extend(ui.get_inputs(title_list, "Please provide the required information"))
@@ -105,9 +105,9 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    title_list = ["ID: "]
+    title_list = ["ID"]
     inputs = []
-    inputs.extend(ui.get_inputs(title_list, "ID of removable item:"))
+    inputs.extend(ui.get_inputs(title_list, "ID of removable item"))
     for lst in table:
         if inputs[0] in lst:
             table.remove(lst)
@@ -146,7 +146,7 @@ def update(table, id_):
         id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
         for row in table:
             if row[0] == id_[0]:
-                table[id_index] = ui.get_inputs(["Title: ", "Manufacturer: ", "Price: ", "Stock: "], "Please provide the necessary information: ")
+                table[id_index] = ui.get_inputs(["Title", "Manufacturer", "Price", "Stock"], "Please provide the necessary information: ")
                 table[id_index].insert(0, id_[0])
                 wrong_id = False
             else:
@@ -198,4 +198,12 @@ def get_average_by_manufacturer(table, manufacturer):
          number
     """
 
-    # your code
+    manufacturer = ui.get_inputs(["Manufacturer"], "Enter the manufacturer for avarage number of games")
+    total_num_games = 0
+    num_of_titles = 0
+    for row in table:
+        if row[2] == manufacturer:
+            num_of_titles += 1
+            total_num_games += int(row[4])
+    avg_of_games = total_num_games / num_of_titles
+    ui.print_result(str(avg_of_games), "Avarage number of games by the manufacturer")
