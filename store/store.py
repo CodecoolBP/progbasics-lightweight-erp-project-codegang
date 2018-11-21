@@ -186,4 +186,12 @@ def get_average_by_manufacturer(table, manufacturer):
          number
     """
 
-    # your code
+    manufacturer = ui.get_inputs(["Manufacturer"], "Enter the manufacturer for avarage number of games")
+    total_num_games = 0
+    num_of_titles = 0
+    for row in table:
+        if row[2] == manufacturer:
+            num_of_titles += 1
+            total_num_games += int(row[4])
+    avg_of_games = total_num_games / num_of_titles
+    ui.print_result(str(avg_of_games), "Avarage number of games by the manufacturer")
