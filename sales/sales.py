@@ -107,7 +107,7 @@ def remove(table, id_):
     """
 
     inputs = []
-    inputs.extend(ui.get_inputs(["ID: "], "ID of removable item:"))
+    inputs.extend(ui.get_inputs(["ID"], "ID of removable item"))
     for lst in table:
         if inputs[0] in lst:
             table.remove(lst)
@@ -147,7 +147,7 @@ def update(table, id_):
         id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
         for row in table:
             if row[0] == id_[0]:
-                table[id_index] = ui.get_inputs(["Title: ", "Price: ", "Month: ", "Day: ", "Year: "], "Please provide the necessary information: ")
+                table[id_index] = ui.get_inputs(["Title", "Price", "Month", "Day", "Year"], "Please provide the necessary information: ")
                 table[id_index].insert(0, id_[0])
                 wrong_id = False
             else:
@@ -218,6 +218,3 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         if from_date <= sale_date <= to_date:
             result.append(row)
     return result
-
-
-

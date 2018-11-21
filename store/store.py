@@ -165,13 +165,14 @@ def get_counts_by_manufacturers(table):
     Question: How many different kinds of game are available of each manufacturer?
 
     Args:
-        table (print(result)rk on
+        table 
 
     Returns:
-         dict: print(result)structure: { [manufacturer] : [count] }
+         dict: structure: { [manufacturer] : [count] }
     """
 
-    # your codeprint(result)
+    # your code
+    
     result = {}
     for i in table:
         if i[2] not in result:
@@ -180,7 +181,8 @@ def get_counts_by_manufacturers(table):
         if i[2] in result.keys():
             result[i[2]] += 1
     ui.print_result(result, 'Different kind of games in store of each manufacturer')
-
+    return result
+    
             
 
 
@@ -206,3 +208,4 @@ def get_average_by_manufacturer(table, manufacturer):
             total_num_games += int(row[4])
     avg_of_games = total_num_games / num_of_titles
     ui.print_result(str(avg_of_games), "Avarage number of games by the manufacturer")
+    

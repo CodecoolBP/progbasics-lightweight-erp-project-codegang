@@ -47,8 +47,7 @@ def start_module():
         elif option == "4":
             update(table, id)
         elif option == "5":
-            title_list = ["ID", "Title", "Company", "Year", "Amount", "Availablity"]
-            ui.print_table(get_available_items(table), title_list)
+            ui.print_result(get_available_items(table), "Available items:")
         elif option == "6":
             ui.print_result(get_average_durability_by_manufacturers(table), "Average durability by manufacturers")
         elif option == "0":
@@ -93,8 +92,6 @@ def add(table):
     return table
     # your code
 
-    return table
-
 
 def remove(table, id_):
     """
@@ -114,9 +111,6 @@ def remove(table, id_):
         if inputs[0] in lst:
             table.remove(lst)
     data_manager.write_table_to_file("inventory/inventory_test.csv", table)
-    return table
-    # your code
-
     return table
 
 
@@ -160,16 +154,13 @@ def get_available_items(table):
         list: list of lists (the inner list contains the whole row with their actual data types)
     """
     result = []
-    counter = 0
     for row in table:
-        result.append(row)
-        purchase_year = int(row[-2])
-        durability = int(row[-1])
-        if purchase_year+durability >= 2018:
-            result[counter].append("Available")
-        else:
-            result[counter].append("Not available")
-        counter +=1
+        row[-2] = int(row[-2])
+        row[-1] = int(row[-1])
+        purchase_year = row[-2]
+        durability = row[-1]
+        if purchase_year+durability >= 2017:
+            result.append(row)
     return result
     # your code
 
