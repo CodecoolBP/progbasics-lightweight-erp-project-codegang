@@ -165,13 +165,12 @@ def get_counts_by_manufacturers(table):
     Question: How many different kinds of game are available of each manufacturer?
 
     Args:
-        table (print(result)rk on
+        table rk on
 
     Returns:
-         dict: print(result)structure: { [manufacturer] : [count] }
+         dict:structure: { [manufacturer] : [count] }
     """
 
-    # your codeprint(result)
     result = {}
     for i in table:
         if i[2] not in result:
