@@ -171,7 +171,8 @@ def get_counts_by_manufacturers(table):
          dict: print(result)structure: { [manufacturer] : [count] }
     """
 
-    # your codeprint(result)
+    # your code
+    
     result = {}
     for i in table:
         if i[2] not in result:
