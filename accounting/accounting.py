@@ -39,7 +39,7 @@ def start_module():
                 "Average profit per item in given year"])
     while True:
         ui.print_menu("Accounting menu", options, "Back to main menu")
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["Please enter a number"], "")
         option = inputs[0]
         if option == "1":
             show_table(table)
@@ -52,7 +52,7 @@ def start_module():
         elif option == "5":
             ui.print_result(which_year_max(table),"Best year")
         elif option == "6":
-            ui.print_result(avg_amount(table, ui.get_inputs(["Please enter a year: "], "")),"Average amount")
+            ui.print_result(avg_amount(table, ui.get_inputs(["Please enter a year"], "")),"Average amount")
         elif option == "0":
             break                       #ui.print_menu("Main menu", options, "Exit program")
         else:
@@ -121,7 +121,7 @@ def remove(table, id_):
     # your code
     wrong_id = True
     while wrong_id:
-        id_ = ui.get_inputs(["ID: "], "Choose an ID to remove: ")
+        id_ = ui.get_inputs(["ID"], "Choose an ID to remove")
         for row in table:
             if row[0] == id_[0]:
                 table.remove(row)
@@ -147,10 +147,10 @@ def update(table, id_):
     id_index = 0
     wrong_id = True
     while wrong_id:
-        id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+        id_ = ui.get_inputs(["ID"], "Choose an ID to update")
         for row in table:
             if row[0] == id_[0]:
-                table[id_index] = ui.get_inputs(["Month", "Day", "Year", "Type", "Amount"], "Please provide the necessary information: ")
+                table[id_index] = ui.get_inputs(["Month", "Day", "Year", "Type", "Amount"], "Please provide the necessary information")
                 table[id_index].insert(0, id_[0])
                 wrong_id = False
             else:
