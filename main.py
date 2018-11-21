@@ -19,7 +19,7 @@ from crm import crm
 
 
 def choose():
-    inputs = ui.get_inputs(["Please enter a number: "], "")
+    inputs = ui.get_inputs(["Please enter a number"], "")
     option = inputs[0]
     if option == "1":
         store.start_module()

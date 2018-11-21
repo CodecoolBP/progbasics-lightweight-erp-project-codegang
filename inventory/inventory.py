@@ -36,7 +36,7 @@ def start_module():
                 "Average durability by manufacturers"])
     while True:
         ui.print_menu("Inventory menu", options, "Back to main menu")
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["Please enter a number"], "")
         option = inputs[0]
         if option == "1":
             show_table(table)
@@ -83,7 +83,7 @@ def add(table):
     Returns:
         list: Table with a new record
     """
-    title_list = ["Title: ", "Company: ", "Year: ", "Amount: "]
+    title_list = ["Title", "Company", "Year", "Amount"]
     inputs = [] 
     id_ = common.generate_random(table)
     inputs.extend(ui.get_inputs(title_list, "Please provide the required information"))
@@ -109,7 +109,7 @@ def remove(table, id_):
     """
     title_list = ["ID: "]
     inputs = []
-    inputs.extend(ui.get_inputs(title_list, "ID of removable item:"))
+    inputs.extend(ui.get_inputs(title_list, "ID of removable item"))
     for lst in table:
         if inputs[0] in lst:
             table.remove(lst)
@@ -133,10 +133,10 @@ def update(table, id_):
     """
     id_index = 0
     inputs = []
-    id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+    id_ = ui.get_inputs(["ID"], "Choose an ID to update: ")
     for row in table:
         if row[0] == id_[0]:
-            inputs.extend(ui.get_inputs(["Title: ", "Company: ", "Year: ", "Amount: "], "Please provide the necessary information: "))
+            inputs.extend(ui.get_inputs(["Title", "Company", "Year", "Amount"], "Please provide the necessary information"))
             for i in range(len(inputs)):
                 table[id_index][i+1] = inputs[i-1]
         else:    

@@ -36,7 +36,7 @@ def start_module():
                 "Get person close to avarage"])
     while True:
         ui.print_menu("HR menu", options, "Back to main menu")
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["Please enter a number"], "")
         option = inputs[0]
         if option == "1":
             show_table(table)
@@ -85,7 +85,7 @@ def add(table):
         list: Table with a new record
     """
 
-    title_list = ["Name: ", "Year: "]
+    title_list = ["Name", "Year"]
     inputs = [] 
     id_ = common.generate_random(table)
     inputs.extend(ui.get_inputs(title_list, "Please provide the required information:"))
@@ -108,7 +108,7 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    title_list = ["ID: "]
+    title_list = ["ID"]
     inputs = []
     inputs.extend(ui.get_inputs(title_list, "ID of removable person:"))
     for lst in table:
@@ -133,11 +133,11 @@ def update(table, id_):
     id_index = 0
     wrong_id = True
     while wrong_id:
-        id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+        id_ = ui.get_inputs(["ID"], "Choose an ID to update")
         for row in table:
             if row[0] == id_[0]:
-                table[id_index] = ui.get_inputs(["Name: ", "Year: "], "Please provide the necessary information: ")
-                inputs(["Name: ","Year: "], "Please provide the necessary information: ")
+                table[id_index] = ui.get_inputs(["Name", "Year"], "Please provide the necessary information: ")
+                inputs(["Name","Year"], "Please provide the necessary information")
                 table[id_index].insert(0, id_[0])
                 wrong_id = False
             else:
@@ -170,7 +170,7 @@ def get_oldest_person(table):
         year_of_oldest = str(year_of_oldest)
         if year_of_oldest in lst:
             name_of_oldest.append(lst[1])
-    ui.print_result(name_of_oldest, "Oldest Person: ")
+    ui.print_result(name_of_oldest, "Oldest Person")
 
 
 

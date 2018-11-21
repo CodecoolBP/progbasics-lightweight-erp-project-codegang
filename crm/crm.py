@@ -36,7 +36,7 @@ def start_module():
                 "Get subscribed e-mails"])
     while True:
         ui.print_menu("Customer Relationship management", options, "Back to main manu")
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["Please enter a number"], "")
         option = inputs[0]
         if option == "1":
             show_table(table)
@@ -83,7 +83,7 @@ def add(table):
 
     new_data = []
     new_data.append(common.generate_random(table))
-    new_data.extend(ui.get_inputs(["Name: ", "Email: ", "Subscribed: "], "Please provide the necessary information: "))
+    new_data.extend(ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the necessary information"))
     table.append(new_data)
     data_manager.write_table_to_file("crm/customers_test.csv", table)
     return table
@@ -102,7 +102,7 @@ def remove(table, id_):
     """
     wrong_id = True
     while wrong_id:
-        id_ = ui.get_inputs(["ID: "], "Choose an ID to remove: ")
+        id_ = ui.get_inputs(["ID"], "Choose an ID to remove")
         for row in table:
             if row[0] == id_[0]:
                 table.remove(row)
@@ -126,10 +126,10 @@ def update(table, id_):
     id_index = 0
     wrong_id = True
     while wrong_id:
-        id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
+        id_ = ui.get_inputs(["ID"], "Choose an ID to update")
         for row in table:
             if row[0] == id_[0]:
-                table[id_index] = ui.get_inputs(["Name: ", "Email: ", "Subscribed: "], "Please provide the necessary information: ")
+                table[id_index] = ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the necessary information")
                 table[id_index].insert(0, id_[0])
                 wrong_id = False
             else:

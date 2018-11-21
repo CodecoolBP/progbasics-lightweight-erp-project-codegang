@@ -36,7 +36,7 @@ def start_module():
                 "Get items sold between dates"])
     while True:
         ui.print_menu("Store menu", options, "Back to main menu")
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["Please enter a number"], "")
         option = inputs[0]
         if option == "1":
             show_table(table)
@@ -47,7 +47,7 @@ def start_module():
         elif option == "4":
             update(table, id)
         elif option == "5":
-            pass
+            get_counts_by_manufacturers(table)
         elif option == "6":
             pass
         elif option == "0":
@@ -83,7 +83,7 @@ def add(table):
         list: Table with a new record
     """
 
-    title_list = ["Title: ", "Manufacturer: ", "Price: ", "Stock: "]
+    title_list = ["Title", "Manufacturer", "Price", "Stock"]
     inputs = [] 
     id_ = common.generate_random(table)
     inputs.extend(ui.get_inputs(title_list, "Please provide the required information"))
@@ -105,9 +105,9 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    title_list = ["ID: "]
+    title_list = ["ID"]
     inputs = []
-    inputs.extend(ui.get_inputs(title_list, "ID of removable item:"))
+    inputs.extend(ui.get_inputs(title_list, "ID of removable item"))
     for lst in table:
         if inputs[0] in lst:
             table.remove(lst)
@@ -146,7 +146,7 @@ def update(table, id_):
         id_ = ui.get_inputs(["ID: "], "Choose an ID to update: ")
         for row in table:
             if row[0] == id_[0]:
-                table[id_index] = ui.get_inputs(["Title: ", "Manufacturer: ", "Price: ", "Stock: "], "Please provide the necessary information: ")
+                table[id_index] = ui.get_inputs(["Title", "Manufacturer", "Price", "Stock"], "Please provide the necessary information: ")
                 table[id_index].insert(0, id_[0])
                 wrong_id = False
             else:
@@ -165,13 +165,24 @@ def get_counts_by_manufacturers(table):
     Question: How many different kinds of game are available of each manufacturer?
 
     Args:
-        table (list): data table to work on
+        table (print(result)rk on
 
     Returns:
-         dict: A dictionary with this structure: { [manufacturer] : [count] }
+         dict: print(result)structure: { [manufacturer] : [count] }
     """
 
-    # your code
+    # your codeprint(result)
+    result = {}
+    for i in table:
+        if i[2] not in result:
+            result[i[2]] = 0
+    for i in table:
+        if i[2] in result.keys():
+            result[i[2]] += 1
+    ui.print_result(result, 'Different kind of games in store of each manufacturer')
+
+            
+
 
 
 def get_average_by_manufacturer(table, manufacturer):
