@@ -93,8 +93,6 @@ def add(table):
     return table
     # your code
 
-    return table
-
 
 def remove(table, id_):
     """

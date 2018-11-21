@@ -180,10 +180,39 @@ def get_subscribed_emails(table):
             list: list of strings (where a string is like "email;name")
         """
 
-    emails_and_names = ""
-    for row in table:
-        if row[-1] == "1":
-            emails_and_names += (row[-2] + ";" + row[1] + ",")
-    emails_and_names = emails_and_names.strip(",")
-    emails_and_names = emails_and_names.split(",")
-    ui.print_result(list(emails_and_names), "The data list is")
+    # your code
+
+
+# functions supports data analyser
+# --------------------------------
+
+
+def get_name_by_id(id):
+    """
+    Reads the table with the help of the data_manager module.
+    Returns the name (str) of the customer with the given id (str) on None om case of non-existing id.
+
+    Args:
+        id (str): the id of the customer
+
+    Returns:
+        str: the name of the customer
+    """
+
+    # your code
+
+
+
+def get_name_by_id_from_table(table, id):
+    """
+    Returns the name (str) of the customer with the given id (str) on None om case of non-existing id.
+
+    Args:
+        table (list of lists): the customer table
+        id (str): the id of the customer
+
+    Returns:
+        str: the name of the customer
+    """
+
+    # your code
