@@ -33,7 +33,7 @@ def start_module():
                 "Remove from table",
                 "Update the table",
                 "Counts games by manufacturer",
-                "Get items sold between dates"])
+                "Get avarage number of games by manufacturer"])
     while True:
         ui.print_menu("Store menu", options, "Back to main menu")
         inputs = ui.get_inputs(["Please enter a number"], "")
@@ -49,7 +49,7 @@ def start_module():
         elif option == "5":
             get_counts_by_manufacturers(table)
         elif option == "6":
-            pass
+            get_average_by_manufacturer(table, ui.get_inputs(["Manudacturer"], "Provide the manufacturer"))
         elif option == "0":
             break                       #ui.print_menu("Main menu", options, "Exit program")
         else:
@@ -199,11 +199,11 @@ def get_average_by_manufacturer(table, manufacturer):
          number
     """
 
-    manufacturer = ui.get_inputs(["Manufacturer"], "Enter the manufacturer for avarage number of games")
     total_num_games = 0
     num_of_titles = 0
+    #manufacturer = ui.get_inputs(["Manufacturer"], "Enter the manufacturer for avarage number of games")
     for row in table:
-        if row[2] == manufacturer:
+        if row[2] == manufacturer[0]:
             num_of_titles += 1
             total_num_games += int(row[4])
     avg_of_games = total_num_games / num_of_titles

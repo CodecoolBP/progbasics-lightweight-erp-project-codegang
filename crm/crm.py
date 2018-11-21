@@ -43,9 +43,11 @@ def start_module():
         elif option == "2":
             add(table)
         elif option == "3":
-            remove(table, id)
+            input_id = ui.get_inputs(["ID"], "Choose an ID to remove")
+            remove(table, input_id)
         elif option == "4":
-            update(table, id)
+            input_id = ui.get_inputs(["ID"], "Choose an ID to update")
+            update(table, id_)
         elif option == "5":
             get_longest_name_id(table)
         elif option == "6":
@@ -66,7 +68,6 @@ def show_table(table):
     """
 
     titles = ["ID", "Name", "Email", "Subscribed"]
-    table = data_manager.get_table_from_file("crm/customers_test.csv")
     ui.print_table(table, titles)
 
 
@@ -102,7 +103,6 @@ def remove(table, id_):
     """
     wrong_id = True
     while wrong_id:
-        id_ = ui.get_inputs(["ID"], "Choose an ID to remove")
         for row in table:
             if row[0] == id_[0]:
                 table.remove(row)
@@ -126,7 +126,6 @@ def update(table, id_):
     id_index = 0
     wrong_id = True
     while wrong_id:
-        id_ = ui.get_inputs(["ID"], "Choose an ID to update")
         for row in table:
             if row[0] == id_[0]:
                 table[id_index] = ui.get_inputs(["Name", "Email", "Subscribed"], "Please provide the necessary information")
@@ -167,6 +166,7 @@ def get_longest_name_id(table):
         if longest_names[-1] in row:
             longest_name_id = row[0]
     ui.print_result(longest_name_id, "The longest name's ID is")
+    return longest_name_id
 
 
 def get_subscribed_emails(table):
@@ -179,6 +179,15 @@ def get_subscribed_emails(table):
         Returns:
             list: list of strings (where a string is like "email;name")
         """
+
+    emails_and_names = ""
+    for row in table:
+        if row[-1] == "1":
+            emails_and_names += (row[-2] + ";" + row[1] + ",")
+    emails_and_names = emails_and_names.strip(",")
+    emails_and_names = emails_and_names.split(",")
+    ui.print_result(list(emails_and_names), "The data list is")
+    return list(emails_and_names)
 
     # your code
 
