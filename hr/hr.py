@@ -171,6 +171,7 @@ def get_oldest_person(table):
         if year_of_oldest in lst:
             name_of_oldest.append(lst[1])
     ui.print_result(name_of_oldest, "Oldest Person")
+    return name_of_oldest
 
 
 
@@ -207,6 +208,7 @@ def get_persons_closest_to_average(table):
         if (smallest_diff_neg or smallest_diff_poz) in lst:
             name_of_avarage.append(lst[1])
     ui.print_result(name_of_avarage, "Person(s) closest to avarage")
+    return name_of_avarage
 
 
     # your code
