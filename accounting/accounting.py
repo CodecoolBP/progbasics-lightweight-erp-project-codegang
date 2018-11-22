@@ -52,7 +52,8 @@ def start_module():
         elif option == "5":
             ui.print_result(which_year_max(table),"Best year")
         elif option == "6":
-            ui.print_result(avg_amount(table, ui.get_inputs(["Please enter a year"], "")),"Average amount")
+            input_data = ui.get_inputs(["Year"], "Enter a year")
+            avg_amount(table, input_data[0])
         elif option == "0":
             break                       #ui.print_menu("Main menu", options, "Exit program")
         else:
@@ -205,7 +206,6 @@ def which_year_max(table):
     return int(best_year)
 
 
-
 def avg_amount(table, year):
     """
     Question: What is the average (per item) profit in a given year? [(profit)/(items count)]
@@ -218,20 +218,16 @@ def avg_amount(table, year):
         number
     """
 
-    # your code
-    
-    given_year = year[0]
     profit = 0
-    counter = 0
-    for line in table:
-        year = line[3]
-        in_or_out = line[4]
-        amount = int(line[5])
-        if year == given_year:
-            counter += 1
-            if in_or_out == "in":
-                profit += amount
+    items_count = 0
+    for row in table:
+        if int(row[3]) == int(year):
+            items_count += 1
+            if row[4] == "in":
+                profit += int(row[5])
             else:
-                profit -= amount
-    avg = profit/counter
-    return avg
+                profit -= int(row[5])
+    if items_count == 0:
+        return items_count
+    ui.print_result(profit / items_count, "Average profit in given year is")
+    return profit / items_count

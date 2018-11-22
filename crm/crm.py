@@ -33,7 +33,9 @@ def start_module():
                 "Remove from table",
                 "Update table",
                 "Get longest name ID",
-                "Get subscribed e-mails"])
+                "Get subscribed e-mails",
+                "Get name by ID",
+                "Get name by id from table"])
     while True:
         ui.print_menu("Customer Relationship management", options, "Back to main manu")
         inputs = ui.get_inputs(["Please enter a number"], "")
@@ -52,6 +54,10 @@ def start_module():
             get_longest_name_id(table)
         elif option == "6":
             get_subscribed_emails(table)
+        elif option == "7":
+            get_name_by_id(id)
+        elif option == "8":
+            get_name_by_id_from_table(table, id)
         elif option == "0":
             break
 
@@ -209,7 +215,8 @@ def get_name_by_id(id):
     """
 
     # your code
-
+    result = get_name_by_id_from_table("crm/customers_test.csv", id)
+    return result
 
 
 def get_name_by_id_from_table(table, id):
@@ -225,3 +232,12 @@ def get_name_by_id_from_table(table, id):
     """
 
     # your code
+    table = data_manager.get_table_from_file("crm/customers_test.csv")       
+    title_list = ["ID"]
+    result = None
+    inputs = ui.get_inputs(title_list, "ID of the person: ")
+    for lst in table:
+        if inputs[0] in lst:
+            result = lst[1]
+    ui.print_result(result, "The name of the person")
+    return result
