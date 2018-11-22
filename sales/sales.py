@@ -51,7 +51,7 @@ def start_module():
             ui.print_result(get_lowest_price_item_id(table), "Lowest price item's ID")
         elif option == "6":
             dates = ui.get_inputs(["Month from", "Day from", "Year from", "Month to", "Day to", "Year to"],"Please give dates")
-            show_table(get_items_sold_between(table, int(dates[0]), int(dates[1]), int(dates[2]), int(dates[3]), int(dates[4]), int(dates[5])))
+            ui.print_result(get_items_sold_between(table, int(dates[0]), int(dates[1]), int(dates[2]), int(dates[3]), int(dates[4]), int(dates[5])),"Items sold betwrrn dates")
         elif option == "0":
             break                       #ui.print_menu("Main menu", options, "Exit program")
         else:
@@ -207,15 +207,39 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         list: list of lists (the filtered table)
     """
     result = []
-    # from_date = date(year_from, month_from, day_from)
-    # to_date = date(year_to, month_to, day_to)
     for row in table:
         sale_month = int(row[3])
         sale_day = int(row[4])
         sale_year = int(row[5])
-        # sale_date = date(sale_year, sale_month, sale_day)
-        if year_from <= sale_year <= year_to:
-            if month_from <= sale_month <= month_to:
-                if day_from <= sale_day <= day_to:
+        
+        if year_from < sale_year < year_to:
+            result.append(row)
+
+        elif year_from == sale_year < year_to:
+            if month_from < sale_month:
+                result.append(row)
+            elif sale_month == month_from:
+                if day_from < sale_day:
                     result.append(row)
-    return
+
+        elif year_from == sale_year and sale_year == year_to:
+            if month_from == sale_month < month_to:
+                if day_from < sale_day:
+                    result.append(row)
+            elif month_from == sale_month == month_to:
+                if day_from < sale_day < day_to:
+                    result.append(row)
+            elif  month_from < sale_month == month_to:
+                if sale_day < day_to:
+                    result.append(row)
+            elif month_from < sale_month < month_to:
+                result.append(row)
+
+        elif year_from < sale_year == year_to:
+            if sale_month < month_to:
+                result.append(row)
+            elif sale_month == month_to:
+                if sale_day < day_to:
+                    result.append(row)
+
+    return result
