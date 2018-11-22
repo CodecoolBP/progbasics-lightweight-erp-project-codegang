@@ -218,4 +218,4 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
             if month_from <= sale_month <= month_to:
                 if day_from <= sale_day <= day_to:
                     result.append(row)
-    return
+    return result[1]
