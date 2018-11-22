@@ -207,6 +207,7 @@ def get_average_by_manufacturer(table, manufacturer):
             num_of_titles += 1
             avg_of_stock += int(row[4])
     if avg_of_stock != 0:
+        ui.print_result(avg_of_stock / num_of_titles, "Avarage amount of games in stock:")
         return avg_of_stock / num_of_titles
     else:
         ui.print_error_message("Stock is empty")
