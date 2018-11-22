@@ -49,7 +49,8 @@ def start_module():
         elif option == "5":
             get_counts_by_manufacturers(table)
         elif option == "6":
-            get_average_by_manufacturer(table, ui.get_inputs(["Manudacturer"], "Provide the manufacturer"))
+            input_data = ui.get_inputs(["Manudacturer"], "Provide the manufacturer")
+            get_average_by_manufacturer(table, input_data[0])
         elif option == "0":
             break                       #ui.print_menu("Main menu", options, "Exit program")
         else:
@@ -199,13 +200,14 @@ def get_average_by_manufacturer(table, manufacturer):
          number
     """
 
-    total_num_games = 0
     num_of_titles = 0
-    #manufacturer = ui.get_inputs(["Manufacturer"], "Enter the manufacturer for avarage number of games")
+    avg_of_stock = 0
     for row in table:
-        if row[2] == manufacturer[0]:
+        if row[2] == manufacturer:
             num_of_titles += 1
-            total_num_games += int(row[4])
-    avg_of_games = total_num_games / num_of_titles
-    ui.print_result(str(avg_of_games), "Avarage number of games by the manufacturer")
-    
+            avg_of_stock += int(row[4])
+    if avg_of_stock != 0:
+        return avg_of_stock / num_of_titles
+    else:
+        ui.print_error_message("Stock is empty")
+        return avg_of_stock

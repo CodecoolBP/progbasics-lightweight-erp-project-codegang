@@ -35,7 +35,7 @@ def choose():
         sales.start_module()
     elif option == "6":
         crm.start_module()
-    elif option == "7":
+    elif option  == "7":
         data_analyser.start_module()
     elif option == "0":
         sys.exit(0)
