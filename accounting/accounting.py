@@ -202,7 +202,7 @@ def which_year_max(table):
         if yearly_profit[year] > highest_profit:
             highest_profit = yearly_profit[year]
             best_year = year
-    return best_year
+    return int(best_year)
 
 
 
