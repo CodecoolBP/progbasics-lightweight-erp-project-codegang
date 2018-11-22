@@ -206,15 +206,16 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     Returns:
         list: list of lists (the filtered table)
     """
-    from datetime import date
     result = []
-    from_date = date(year_from, month_from, day_from)
-    to_date = date(year_to, month_to, day_to)
+    # from_date = date(year_from, month_from, day_from)
+    # to_date = date(year_to, month_to, day_to)
     for row in table:
         sale_month = int(row[3])
         sale_day = int(row[4])
         sale_year = int(row[5])
-        sale_date = date(sale_year, sale_month, sale_day)
-        if from_date <= sale_date <= to_date:
-            result.append(row)
-    return result
+        # sale_date = date(sale_year, sale_month, sale_day)
+        if year_from <= sale_year <= year_to:
+            if month_from <= sale_month <= month_to:
+                if day_from <= sale_day <= day_to:
+                    result.append(row)
+    return
